@@ -23,26 +23,28 @@ public static class ConfigurationExtensions
         Telemetry.ActivitySource = new ActivitySource(appOptions.Name);
 
         // configure tracing
-        services.AddOpenTelemetryTracing(builder => builder
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation(options =>
-            {
-                options.Filter = message =>
+        services
+            .AddOpenTelemetry()
+            .WithTracing(builder => builder
+                .AddAspNetCoreInstrumentation()
+                .AddHttpClientInstrumentation(options =>
                 {
-                    // ignore http calls to seq
-                    var requestUrl = message.RequestUri?.ToString() ?? string.Empty;
-                    if (requestUrl.StartsWith(logOptions.Seq.ServiceUrl))
-                        return false;
+                    options.FilterHttpRequestMessage = message =>
+                    {
+                        // ignore http calls to seq
+                        var requestUrl = message.RequestUri?.ToString() ?? string.Empty;
+                        if (requestUrl.StartsWith(logOptions.Seq.ServiceUrl))
+                            return false;
 
-                    return true;
-                };
-            })
-            .SetResourceBuilder(ResourceBuilder
-                .CreateDefault()
-                .AddService(appOptions.Name))
-            .AddSource("MassTransit")
-            .AddSource(appOptions.Name) // app-specific source from Telemetry.ActivitySource
-            .AddJaegerExporter());
+                        return true;
+                    };
+                })
+                .SetResourceBuilder(ResourceBuilder
+                    .CreateDefault()
+                    .AddService(appOptions.Name))
+                .AddSource("MassTransit")
+                .AddSource(appOptions.Name) // app-specific source from Telemetry.ActivitySource
+                .AddJaegerExporter());
 
         return services;
     }
