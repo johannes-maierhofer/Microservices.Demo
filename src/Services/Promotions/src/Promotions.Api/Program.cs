@@ -5,8 +5,6 @@ using Promotions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("appsettings.json", optional: false);
-
 // Add services to the container.
 builder.AddMinimalEndpoints(assemblies: typeof(PromotionsRoot).Assembly);
 builder.AddInfrastructure();

@@ -3,8 +3,6 @@ using Customers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("appsettings.json", optional: false);
-
 // Add services to the container.
 builder.AddMinimalEndpoints(assemblies: typeof(CustomersRoot).Assembly);
 builder.AddInfrastructure();
@@ -18,3 +16,10 @@ app.UseInfrastructure();
 app.UseDatabase();
 
 app.Run();
+
+namespace Customers.Api
+{
+    public partial class Program
+    {
+    }
+}
