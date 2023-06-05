@@ -1,7 +1,6 @@
 using System.Reflection;
 using BuildingBlocks.Configuration;
 using MassTransit;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,20 +11,21 @@ public static class ConfigurationExtensions
 {
     public static IServiceCollection AddCustomMassTransit(
         this IServiceCollection services,
-        WebApplicationBuilder builder,
+        IConfiguration configuration,
+        IHostEnvironment env,
         Assembly assembly)
     {
         services.AddScoped<IMessageBus, MassTransitMessageBus>();
 
         services.AddValidateOptions<RabbitMqOptions>();
 
-        if (builder.Environment.IsEnvironment("test"))
+        if (env.IsEnvironment("test"))
         {
             services.AddMassTransitTestHarness(configure =>
             {
                 SetupMasstransitConfigurations(
                     services,
-                    builder,
+                    configuration,
                     configure,
                     assembly);
             });
@@ -36,7 +36,7 @@ public static class ConfigurationExtensions
         {
             SetupMasstransitConfigurations(
                 services,
-                builder,
+                configuration,
                 configure,
                 assembly);
         });
@@ -46,11 +46,11 @@ public static class ConfigurationExtensions
 
     private static void SetupMasstransitConfigurations(
         IServiceCollection services,
-        WebApplicationBuilder builder,
+        IConfiguration configuration,
         IBusRegistrationConfigurator configure,
         Assembly assembly)
     {
-        var appOptions = builder.Configuration
+        var appOptions = configuration
             .GetSection("App")
             .Get<AppOptions>();
 

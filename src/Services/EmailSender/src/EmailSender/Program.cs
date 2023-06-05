@@ -1,16 +1,18 @@
-﻿using Microsoft.AspNetCore.Builder;
-using System.Reflection;
+﻿using System.Reflection;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Messaging.MassTransit;
 using BuildingBlocks.Tracing.OpenTelemetry;
+using Microsoft.Extensions.Hosting;
 
-var hostBuilder = WebApplication.CreateBuilder(args);
+var hostBuilder = Host.CreateApplicationBuilder(args);
 
 hostBuilder.Services
-    .AddCustomMassTransit(hostBuilder, Assembly.GetExecutingAssembly())
-    .AddCustomOpenTelemetry();
-
-hostBuilder.AddCustomSerilog();
+    .AddCustomMassTransit(
+        hostBuilder.Configuration,
+        hostBuilder.Environment,
+        Assembly.GetExecutingAssembly())
+    .AddCustomOpenTelemetry()
+    .AddCustomSerilog(hostBuilder.Configuration);
 
 var host = hostBuilder.Build();
 

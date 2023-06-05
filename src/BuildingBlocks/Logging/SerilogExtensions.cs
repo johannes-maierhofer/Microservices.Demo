@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Configuration;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Enrichers.Span;
 using Serilog.Events;
@@ -10,23 +10,23 @@ namespace BuildingBlocks.Logging
 {
     public static class SerilogExtensions
     {
-        public static WebApplicationBuilder AddCustomSerilog(this WebApplicationBuilder builder)
+        public static IServiceCollection AddCustomSerilog(this IServiceCollection services, IConfiguration configuration)
         {
-            builder.Host.UseSerilog((context, _, loggerConfiguration) =>
+            // var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var appOptions = configuration
+                .GetSection("App")
+                .Get<AppOptions>();
+
+            var logOptions = configuration
+                .GetSection("Log")
+                .Get<LogOptions>();
+
+            var logLevel = Enum.TryParse<LogEventLevel>(logOptions!.Level, true, out var level)
+                ? level
+                : LogEventLevel.Information;
+
+            services.AddSerilog(loggerConfiguration =>
             {
-                // var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-                var appOptions = context.Configuration
-                    .GetSection("App")
-                    .Get<AppOptions>();
-
-                var logOptions = context.Configuration
-                    .GetSection("Log")
-                    .Get<LogOptions>();
-
-                var logLevel = Enum.TryParse<LogEventLevel>(logOptions!.Level, true, out var level)
-                    ? level
-                    : LogEventLevel.Information;
-
                 loggerConfiguration
                     .MinimumLevel.Is(logLevel)
                     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -38,7 +38,7 @@ namespace BuildingBlocks.Logging
                     .Enrich.WithSpan() // span information from current activity
                     .Enrich.FromLogContext()
                     .Enrich.WithProperty("ApplicationName", appOptions!.Name)
-                    .ReadFrom.Configuration(context.Configuration);
+                    .ReadFrom.Configuration(configuration);
 
                 if (logOptions.Seq is { Enabled: true })
                 {
@@ -46,7 +46,7 @@ namespace BuildingBlocks.Logging
                 }
             });
 
-            return builder;
+            return services;
         }
     }
 }

@@ -39,7 +39,6 @@ namespace Promotions
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            builder.AddCustomSerilog();
             // builder.Services.AddJwt();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddCustomSwagger(builder.Configuration, typeof(PromotionsRoot).Assembly);
@@ -49,7 +48,8 @@ namespace Promotions
             builder.Services.AddProblemDetails();
             //builder.Services.AddCustomMapster(typeof(PromotionsRoot).Assembly);
             //builder.Services.AddCustomHealthCheck();
-            builder.Services.AddCustomMassTransit(builder, typeof(PromotionsRoot).Assembly);
+            builder.Services.AddCustomSerilog(builder.Configuration);
+            builder.Services.AddCustomMassTransit(builder.Configuration, builder.Environment, typeof(PromotionsRoot).Assembly);
             builder.Services.AddCustomOpenTelemetry();
             // builder.Services.AddTransient<AuthHeaderHandler>();
 

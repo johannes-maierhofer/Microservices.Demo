@@ -36,7 +36,6 @@ namespace Customers
                 }
             );
 
-            builder.AddCustomSerilog();
             // builder.Services.AddJwt();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddCustomSwagger(builder.Configuration, typeof(CustomersRoot).Assembly);
@@ -46,7 +45,8 @@ namespace Customers
             builder.Services.AddProblemDetails();
             //builder.Services.AddCustomMapster(typeof(BookingRoot).Assembly);
             //builder.Services.AddCustomHealthCheck();
-            builder.Services.AddCustomMassTransit(builder, typeof(CustomersRoot).Assembly);
+            builder.Services.AddCustomSerilog(builder.Configuration);
+            builder.Services.AddCustomMassTransit(builder.Configuration, builder.Environment, typeof(CustomersRoot).Assembly);
             builder.Services.AddCustomOpenTelemetry();
             // builder.Services.AddTransient<AuthHeaderHandler>();
 
