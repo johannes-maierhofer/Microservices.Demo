@@ -1,15 +1,16 @@
 using BuildingBlocks.Contracts.Messages;
-using BuildingBlocks.Testing;
-using Customers.Api;
 using Customers.Features.Commands.CreateCustomer;
 using FluentAssertions;
 using MassTransit.Testing;
 
 namespace Customers.IntegrationTests.Features
 {
-    public class CreateCustomerTests : TestFixture<Program>, IClassFixture<MsSqlTestFixture>,
-        IClassFixture<RabbitMqTestFixture>
+    public class CreateCustomerTests : AppWriteTestBase
     {
+        public CreateCustomerTests(AppTestFixture fixture) : base(fixture)
+        {
+        }
+
         [Fact]
         public async Task CreateCustomer_ShouldReturnNonEmptyGuid_WhenCommandIsValid()
         {
@@ -17,7 +18,7 @@ namespace Customers.IntegrationTests.Features
             var command = CreateValidCommand();
 
             // Act
-            var response = await SendAsync(command);
+            var response = await Fixture.SendAsync(command);
 
             // Assert
             response.Should().NotBeEmpty();
@@ -30,10 +31,10 @@ namespace Customers.IntegrationTests.Features
             var command = CreateValidCommand();
 
             // Act
-            await SendAsync(command);
+            await Fixture.SendAsync(command);
 
             // Assert
-            var harness = ServiceProvider.GetTestHarness();
+            var harness = Fixture.ServiceProvider.GetTestHarness();
             var eventWasPublished = await harness.Published.Any<CustomerContracts.CustomerCreated>();
             eventWasPublished.Should().Be(true);
         }
@@ -47,5 +48,6 @@ namespace Customers.IntegrationTests.Features
                 EmailAddress = Guid.NewGuid() + "@test.com"
             };
         }
+
     }
 }

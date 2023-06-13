@@ -1,9 +1,7 @@
-﻿using BuildingBlocks.Testing;
-
-namespace Customers.IntegrationTests
+﻿namespace Customers.IntegrationTests
 {
     [CollectionDefinition("App")]
-    public class AppTestCollection : ICollectionFixture<MsSqlTestFixture>, ICollectionFixture<RabbitMqTestFixture>
+    public class AppTestCollection : ICollectionFixture<AppTestFixture>
     {
         // This class has no code, and is never created. Its purpose is simply
         // to be the place to apply [CollectionDefinition] and all the
