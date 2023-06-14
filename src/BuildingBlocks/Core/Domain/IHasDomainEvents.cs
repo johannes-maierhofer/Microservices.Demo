@@ -1,6 +1,6 @@
-﻿using BuildingBlocks.Core.Model.Events;
+﻿using BuildingBlocks.Core.Domain.Events;
 
-namespace BuildingBlocks.Core.Model
+namespace BuildingBlocks.Core.Domain
 {
     public interface IHasDomainEvents
     {

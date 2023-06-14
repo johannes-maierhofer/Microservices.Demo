@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Core.Model
+﻿namespace BuildingBlocks.Core.Domain
 {
     public class AuditableEntity<T> : Entity<T>, IAuditCreated, IAuditLastModified 
         where T : struct

@@ -1,4 +1,4 @@
-﻿using Customers.Model;
+﻿using Customers.Domain;
 
 namespace Customers.IntegrationTests.TestData
 {

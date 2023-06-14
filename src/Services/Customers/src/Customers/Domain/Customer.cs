@@ -1,6 +1,6 @@
-﻿using BuildingBlocks.Core.Model;
+﻿using BuildingBlocks.Core.Domain;
 
-namespace Customers.Model
+namespace Customers.Domain
 {
     public class Customer : Entity<Guid>
     {

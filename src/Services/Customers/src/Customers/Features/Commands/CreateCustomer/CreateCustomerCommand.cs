@@ -1,7 +1,7 @@
 ﻿using BuildingBlocks.Contracts.Messages;
 using BuildingBlocks.Mediatr;
 using BuildingBlocks.Messaging;
-using Customers.Model;
+using Customers.Domain;
 using Customers.Persistence;
 using MediatR;
 

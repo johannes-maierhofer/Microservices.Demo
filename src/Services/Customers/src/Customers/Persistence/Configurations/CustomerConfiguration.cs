@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Customers.Model;
+﻿using Customers.Domain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Customers.Persistence.Configurations

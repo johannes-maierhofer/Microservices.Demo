@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Core.Model.Events
+﻿namespace BuildingBlocks.Core.Domain.Events
 {
     public interface IDomainEventPublisher
     {
