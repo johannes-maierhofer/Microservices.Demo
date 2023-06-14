@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace BuildingBlocks.Exceptions;
+namespace BuildingBlocks.Core.Exceptions;
 
 public class AppException : CustomException
 {
@@ -16,7 +16,7 @@ public class AppException : CustomException
     {
     }
 
-    public AppException(string message,  Exception innerException, int? code = null) : base(message, innerException, code: code)
+    public AppException(string message, Exception innerException, int? code = null) : base(message, innerException, code: code)
     {
     }
 }

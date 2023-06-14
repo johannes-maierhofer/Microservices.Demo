@@ -1,10 +1,10 @@
 using System.Net;
 
-namespace BuildingBlocks.Exceptions
+namespace BuildingBlocks.Core.Exceptions
 {
     public class ConflictException : CustomException
     {
-        public ConflictException(string message, int? code = null) 
+        public ConflictException(string message, int? code = null)
             : base(message, code: code, statusCode: HttpStatusCode.Conflict)
         {
         }

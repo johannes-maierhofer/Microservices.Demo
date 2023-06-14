@@ -1,6 +1,6 @@
 using FluentValidation.Results;
 
-namespace BuildingBlocks.Exceptions
+namespace BuildingBlocks.Core.Exceptions
 {
     public class ValidationException : CustomException
     {

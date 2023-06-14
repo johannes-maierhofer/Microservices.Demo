@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Exceptions;
+﻿using BuildingBlocks.Core.Exceptions;
 using BuildingBlocks.Mediatr;
 using Customers.Persistence;
 using MediatR;

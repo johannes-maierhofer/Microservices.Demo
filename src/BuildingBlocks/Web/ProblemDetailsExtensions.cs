@@ -1,4 +1,4 @@
-using BuildingBlocks.Exceptions;
+using BuildingBlocks.Core.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;

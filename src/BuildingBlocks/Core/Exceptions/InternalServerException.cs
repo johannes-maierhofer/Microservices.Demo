@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Net;
 
-namespace BuildingBlocks.Exceptions
+namespace BuildingBlocks.Core.Exceptions
 {
     public class InternalServerException : CustomException
     {

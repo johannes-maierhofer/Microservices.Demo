@@ -31,7 +31,7 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
             .ToList();
 
         if (failures.Any())
-            throw new Exceptions.ValidationException(failures);
+            throw new Core.Exceptions.ValidationException(failures);
 
         return await next();
     }
