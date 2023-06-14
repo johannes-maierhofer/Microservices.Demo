@@ -1,6 +1,6 @@
 ﻿namespace BuildingBlocks.Core.Domain
 {
-    public class AuditableEntity<T> : Entity<T>, IAuditCreated, IAuditLastModified 
+    public class AuditableEntity<T> : Entity<T>
         where T : struct
     {
         public DateTimeOffset CreatedAt { get; set; }
