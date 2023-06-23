@@ -1,4 +1,5 @@
 ﻿using BuildingBlocks.Configuration;
+using BuildingBlocks.HealthCheck;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Mediatr;
 using BuildingBlocks.Messaging.MassTransit;
@@ -44,7 +45,7 @@ namespace Customers
             builder.Services.AddValidatorsFromAssembly(typeof(CustomersRoot).Assembly);
             builder.Services.AddProblemDetails();
             //builder.Services.AddCustomMapster(typeof(BookingRoot).Assembly);
-            //builder.Services.AddCustomHealthCheck();
+            builder.Services.AddCustomHealthCheck();
             builder.Services.AddCustomSerilog(builder.Configuration);
             builder.Services.AddCustomMassTransit(builder.Configuration, builder.Environment, typeof(CustomersRoot).Assembly);
             builder.Services.AddCustomOpenTelemetry();
@@ -63,7 +64,7 @@ namespace Customers
             //app.UseCorrelationId();
             //app.UseHttpMetrics();
             //app.UseMigrationPersistMessage<PersistMessageDbContext>(env);
-            //app.UseCustomHealthCheck();
+            app.UseCustomHealthCheck();
             //app.MapMetrics();
             app.MapGet("/", x => x.Response.WriteAsync(appOptions.Name));
 

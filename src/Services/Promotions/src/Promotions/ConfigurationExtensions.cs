@@ -1,4 +1,5 @@
 ﻿using BuildingBlocks.Configuration;
+using BuildingBlocks.HealthCheck;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Mediatr;
 using BuildingBlocks.Messaging.MassTransit;
@@ -47,7 +48,7 @@ namespace Promotions
             // builder.Services.AddValidatorsFromAssembly(typeof(PromotionsRoot).Assembly);
             builder.Services.AddProblemDetails();
             //builder.Services.AddCustomMapster(typeof(PromotionsRoot).Assembly);
-            //builder.Services.AddCustomHealthCheck();
+            builder.Services.AddCustomHealthCheck();
             builder.Services.AddCustomSerilog(builder.Configuration);
             builder.Services.AddCustomMassTransit(builder.Configuration, builder.Environment, typeof(PromotionsRoot).Assembly);
             builder.Services.AddCustomOpenTelemetry();
@@ -69,7 +70,7 @@ namespace Promotions
             //});
             //app.UseCorrelationId();
             //app.UseHttpMetrics();
-            //app.UseCustomHealthCheck();
+            app.UseCustomHealthCheck();
             //app.MapMetrics();
             app.MapGet("/", x => x.Response.WriteAsync(appOptions.Name));
 
