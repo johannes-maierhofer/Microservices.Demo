@@ -33,7 +33,7 @@ public static class ConfigurationExtensions
                 setup.SetEvaluationTimeInSeconds(60); // time in seconds between check
                 setup.AddHealthCheckEndpoint($"Basic Health Check - {appOptions.Name}", "/healthz");
             })
-            .AddInMemoryStorage();
+            .AddSqlServerStorage(healthOptions.SqlServerStorageConnectionString);
 
         return services;
     }

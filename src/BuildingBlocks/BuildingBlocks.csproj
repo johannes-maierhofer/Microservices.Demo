@@ -13,6 +13,7 @@
 	<PackageReference Include="AspNetCore.HealthChecks.UI" Version="7.0.0-rc2.7" />
 	<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.0.0-rc2.7" />
 	<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="7.0.0-rc2.7" />
+	<PackageReference Include="AspNetCore.HealthChecks.UI.SqlServer.Storage" Version="7.0.0-rc2.7" />
 	<PackageReference Include="FluentValidation" Version="11.5.2" />
 	<PackageReference Include="Humanizer.Core" Version="2.14.1" />
 	<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.8" />
