@@ -10,7 +10,7 @@ builder.AddMinimalEndpoints(assemblies: typeof(PromotionsRoot).Assembly);
 builder.AddInfrastructure();
 
 // for using send we have to explicitly map endpoints
-EndpointConvention.Map<EmailSenderContracts.SendEmail>(new Uri("queue:email-sender-service-send-email"));
+EndpointConvention.Map<EmailSenderContracts.SendEmail>(new Uri("exchange:email-sender-service-send-email"));
 
 var app = builder.Build();
 

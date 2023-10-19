@@ -3,6 +3,7 @@ using BuildingBlocks.HealthCheck;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Mediatr;
 using BuildingBlocks.Messaging.MassTransit;
+using BuildingBlocks.SqlServer;
 using BuildingBlocks.Tracing.OpenTelemetry;
 using BuildingBlocks.Web;
 using BuildingBlocks.Web.Swagger;
@@ -12,7 +13,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -29,10 +29,11 @@ namespace Customers
                 options.SuppressModelStateInvalidFilter = true;
             });
 
+            var sqlServerOptions = builder.Services.GetOptions<SqlServerOptions>("SqlServer");
             builder.Services.AddDbContext<CustomerDbContext>((_, options) =>
                 {
                     options.UseSqlServer(
-                        builder.Configuration.GetConnectionString("DefaultConnection"),
+                        sqlServerOptions.ConnectionString,
                         b => b.MigrationsAssembly(typeof(CustomerDbContext).Assembly.FullName));
                 }
             );

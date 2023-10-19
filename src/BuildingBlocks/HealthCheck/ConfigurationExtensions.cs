@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Configuration;
-using BuildingBlocks.Logging;
 using BuildingBlocks.Messaging.MassTransit;
+using BuildingBlocks.SqlServer;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -20,13 +20,23 @@ public static class ConfigurationExtensions
             return services;
 
         var appOptions = services.GetOptions<AppOptions>("App");
-        var rabbitMqOptions = services.GetOptions<RabbitMqOptions>("RabbitMq");
-        //var logOptions = services.GetOptions<LogOptions>(nameof(LogOptions));
+        
+        var healthChecksBuilder = services.AddHealthChecks();
 
-        var healthChecksBuilder = services.AddHealthChecks()
-            .AddRabbitMQ(
-                rabbitConnectionString:
-                $"amqp://{rabbitMqOptions.UserName}:{rabbitMqOptions.Password}@{rabbitMqOptions.HostName}");
+        var rabbitMqOptions = services.GetOptions<RabbitMqOptions>("RabbitMq");
+        if (!string.IsNullOrEmpty(rabbitMqOptions.HostName))
+        {
+            healthChecksBuilder
+                .AddRabbitMQ(
+                    rabbitConnectionString:
+                    $"amqp://{rabbitMqOptions.UserName}:{rabbitMqOptions.Password}@{rabbitMqOptions.HostName}");
+        }
+
+        var sqlServerOptions = services.GetOptions<SqlServerOptions>("SqlServer");
+        if (!string.IsNullOrEmpty(sqlServerOptions.ConnectionString))
+        {
+            healthChecksBuilder.AddSqlServer(sqlServerOptions.ConnectionString);
+        }
 
         services.AddHealthChecksUI(setup =>
             {

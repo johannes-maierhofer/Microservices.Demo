@@ -26,7 +26,16 @@ public static class ConfigurationExtensions
         services
             .AddOpenTelemetry()
             .WithTracing(builder => builder
-                .AddAspNetCoreInstrumentation()
+                .AddAspNetCoreInstrumentation(options =>
+                {
+                    options.Filter = context =>
+                    {
+                        if (context.Request.Path.ToString().EndsWith("/healthz"))
+                            return false;
+
+                        return true;
+                    };
+                })
                 .AddHttpClientInstrumentation(options =>
                 {
                     options.FilterHttpRequestMessage = message =>
@@ -34,6 +43,10 @@ public static class ConfigurationExtensions
                         // ignore http calls to seq
                         var requestUrl = message.RequestUri?.ToString() ?? string.Empty;
                         if (requestUrl.StartsWith(logOptions.Seq.ServiceUrl))
+                            return false;
+
+                        // ignore http calls to health-check
+                        if (requestUrl.ToLower().EndsWith("/healthz"))
                             return false;
 
                         return true;
