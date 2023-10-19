@@ -61,7 +61,10 @@ namespace Customers
             var appOptions = app.GetOptions<AppOptions>(nameof(AppOptions));
 
             app.UseCustomProblemDetails();
-            app.UseSerilogRequestLogging();
+            app.UseSerilogRequestLogging(cfg =>
+            {
+                cfg.GetLevel = LogHelper.GetCustomLogEventLevel;
+            });
             //app.UseCorrelationId();
             //app.UseHttpMetrics();
             //app.UseMigrationPersistMessage<PersistMessageDbContext>(env);

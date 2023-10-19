@@ -34,6 +34,7 @@ namespace BuildingBlocks.Logging
                     .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Error)
                     // Filter out ASP.NET Core infrastructure logs that are Information and below
                     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+                    .MinimumLevel.Override("System.Net.Http.HttpClient.health-checks", LogEventLevel.Warning)
                     .Enrich.WithExceptionDetails()
                     .Enrich.WithSpan() // span information from current activity
                     .Enrich.FromLogContext()
