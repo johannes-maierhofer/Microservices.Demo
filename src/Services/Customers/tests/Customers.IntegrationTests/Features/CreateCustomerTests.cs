@@ -41,13 +41,10 @@ namespace Customers.IntegrationTests.Features
 
         private static CreateCustomerCommand CreateValidCommand()
         {
-            return new CreateCustomerCommand
-            {
-                FirstName = "First",
-                LastName = "Last",
-                EmailAddress = Guid.NewGuid() + "@test.com"
-            };
+            return new CreateCustomerCommand(
+                "First",
+                "Last",
+                Guid.NewGuid() + "@test.com");
         }
-
     }
 }

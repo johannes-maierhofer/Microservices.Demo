@@ -1,4 +1,6 @@
 ﻿using BuildingBlocks.Configuration;
+using BuildingBlocks.Core.Domain.Events;
+using BuildingBlocks.EfCore.Interceptors;
 using BuildingBlocks.HealthCheck;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Mediatr;
@@ -29,12 +31,18 @@ namespace Customers
                 options.SuppressModelStateInvalidFilter = true;
             });
 
+            builder.Services.AddSingleton<IDomainEventPublisher, DomainEventPublisher>();
+            builder.Services.AddSingleton<DomainEventDispatchingInterceptor>();
+
             var sqlServerOptions = builder.Services.GetOptions<SqlServerOptions>("SqlServer");
-            builder.Services.AddDbContext<CustomerDbContext>((_, options) =>
+            builder.Services.AddDbContext<CustomerDbContext>((serviceProvider, options) =>
                 {
                     options.UseSqlServer(
                         sqlServerOptions.ConnectionString,
                         b => b.MigrationsAssembly(typeof(CustomerDbContext).Assembly.FullName));
+
+                    // add interceptors
+                    options.AddInterceptors(serviceProvider.GetRequiredService<DomainEventDispatchingInterceptor>());
                 }
             );
 
@@ -89,7 +97,7 @@ namespace Customers
             {
                 var context = services.GetRequiredService<CustomerDbContext>();
 
-                if (context.Database.IsSqlServer())
+                if (context.Database.IsSqlServer() && !app.Environment.IsEnvironment("test"))
                     context.Database.Migrate();
             }
             catch (Exception ex)

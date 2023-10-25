@@ -1,15 +1,20 @@
-﻿using Customers.Domain;
+﻿using Customers.Domain.Customers;
 
 namespace Customers.IntegrationTests.TestData
 {
     public static class CustomerTestData
     {
-        public static Customer TestCustomer => new()
+        public static Customer TestCustomer => CreateTestCustomer();
+
+        private static Customer CreateTestCustomer()
         {
-            Id = new Guid("A1DF1FE0-7431-4585-A7B6-15DE49B8F5CC"),
-            FirstName = "Luciano",
-            LastName = "Pavarotti",
-            EmailAddress = "luciano.pavarotto@scala.it"
-        };
+            var customer = Customer.Create(
+                "Luciano",
+                "Pavarotti",
+                "luciano.pavarotto@scala.it"
+            );
+            customer.ClearDomainEvents();
+            return customer;
+        }
     }
 }

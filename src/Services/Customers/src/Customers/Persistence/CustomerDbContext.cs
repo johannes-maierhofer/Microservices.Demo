@@ -1,5 +1,5 @@
 ﻿using BuildingBlocks.EfCore.Conventions;
-using Customers.Domain;
+using Customers.Domain.Customers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Customers.Persistence
