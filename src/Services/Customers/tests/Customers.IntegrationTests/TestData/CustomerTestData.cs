@@ -4,7 +4,7 @@ namespace Customers.IntegrationTests.TestData
 {
     public static class CustomerTestData
     {
-        public static Customer TestCustomer => CreateTestCustomer();
+        public static Customer TestCustomer { get; } = CreateTestCustomer();
 
         private static Customer CreateTestCustomer()
         {
