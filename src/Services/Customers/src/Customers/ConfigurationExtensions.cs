@@ -31,8 +31,8 @@ namespace Customers
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            builder.Services.AddSingleton<IDomainEventPublisher, DomainEventPublisher>();
-            builder.Services.AddSingleton<DomainEventDispatchingInterceptor>();
+            builder.Services.AddScoped<IDomainEventPublisher, DomainEventPublisher>();
+            builder.Services.AddScoped<DomainEventDispatchingInterceptor>(); // must be scoped
 
             var sqlServerOptions = builder.Services.GetOptions<SqlServerOptions>("SqlServer");
             builder.Services.AddDbContext<CustomerDbContext>((serviceProvider, options) =>

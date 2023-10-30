@@ -15,7 +15,7 @@ public static class ConfigurationExtensions
         IHostEnvironment env,
         Assembly assembly)
     {
-        services.AddSingleton<IMessageBus, MassTransitMessageBus>();
+        services.AddScoped<IMessageBus, MassTransitMessageBus>();
 
         services.AddValidateOptions<RabbitMqOptions>();
 
