@@ -15,7 +15,7 @@ public static class ConfigurationExtensions
         IHostEnvironment env,
         Assembly assembly)
     {
-        services.AddScoped<IMessageBus, MassTransitMessageBus>();
+        services.AddSingleton<IMessageBus, MassTransitMessageBus>();
 
         services.AddValidateOptions<RabbitMqOptions>();
 
@@ -54,7 +54,7 @@ public static class ConfigurationExtensions
             .GetSection("App")
             .Get<AppOptions>();
 
-        configure.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter(appOptions!.Name + "-", false));
+        configure.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter(appOptions!.Name + "--", false));
         configure.AddConsumers(assembly);
 
         configure.UsingRabbitMq((ctx, configurator) =>
