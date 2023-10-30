@@ -24,18 +24,18 @@ namespace EmailSender.MessageConsumers
 
     public class SendEmailConsumerDefinition : ConsumerDefinition<SendEmailConsumer>
     {
-        public SendEmailConsumerDefinition()
-        {
-            ConcurrentMessageLimit = 8;
-        }
-
-        protected override void ConfigureConsumer(IReceiveEndpointConfigurator endpointConfigurator, IConsumerConfigurator<SendEmailConsumer> consumerConfigurator)
+        protected override void ConfigureConsumer(IReceiveEndpointConfigurator endpointConfigurator, IConsumerConfigurator<SendEmailConsumer> consumerConfigurator,
+            IRegistrationContext context)
         {
             consumerConfigurator.UseMessageRetry(r => r.Exponential(
                 3,
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
                 TimeSpan.FromSeconds(1)));
+
+            consumerConfigurator.UseConcurrentMessageLimit(8);
+
+            base.ConfigureConsumer(endpointConfigurator, consumerConfigurator, context);
         }
     }
 
