@@ -1,5 +1,6 @@
 ﻿using BuildingBlocks.EfCore.Conventions;
 using Customers.Domain.Customers;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace Customers.Persistence
@@ -27,6 +28,24 @@ namespace Customers.Persistence
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(typeof(CustomerDbContext).Assembly);
+
+            // MassTransit Outbox
+            builder.AddInboxStateEntity(b =>
+            {
+                b.ToTable("InboxState", "MassTransit");
+            });
+            builder.AddOutboxMessageEntity(b =>
+            {
+                b.ToTable("OutboxMessage", "MassTransit");
+                b.Property(p => p.Body).HasMaxLength(int.MaxValue);
+                b.Property(p => p.Headers).HasMaxLength(int.MaxValue);
+                b.Property(p => p.Properties).HasMaxLength(int.MaxValue);
+                b.Property(p => p.MessageType).HasMaxLength(512);
+            });
+            builder.AddOutboxStateEntity(b =>
+            {
+                b.ToTable("OutboxState", "MassTransit");
+            });
         }
     }
 }

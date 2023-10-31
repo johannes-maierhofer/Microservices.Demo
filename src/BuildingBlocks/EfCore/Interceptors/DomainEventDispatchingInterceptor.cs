@@ -26,7 +26,16 @@ namespace BuildingBlocks.EfCore.Interceptors
             int result,
             CancellationToken cancellationToken = new())
         {
-            await DispatchDomainEvents(eventData.Context);
+            if (eventData.Context == null) return result;
+
+            var dbContext = eventData.Context;
+            await DispatchDomainEvents(dbContext);
+            
+            // save again if domain events caused data to change
+            // TODO: not sure if this is a good idea (Interceptor calling SaveChanges again)
+            if(dbContext.ChangeTracker.HasChanges())
+                await eventData.Context.SaveChangesAsync(cancellationToken);
+
             return result;
         }
 

@@ -56,7 +56,10 @@ namespace Customers
             //builder.Services.AddCustomMapster(typeof(BookingRoot).Assembly);
             builder.Services.AddCustomHealthCheck();
             builder.Services.AddCustomSerilog(builder.Configuration);
-            builder.Services.AddCustomMassTransit(builder.Configuration, builder.Environment, typeof(CustomersRoot).Assembly);
+            builder.Services.AddCustomMassTransit<CustomerDbContext>(
+                builder.Configuration,
+                builder.Environment,
+                typeof(CustomersRoot).Assembly);
             builder.Services.AddCustomOpenTelemetry();
             // builder.Services.AddTransient<AuthHeaderHandler>();
 

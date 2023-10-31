@@ -19,6 +19,7 @@ namespace BuildingBlocks.Mediatr
                 cfg.AddOpenBehavior(typeof(TracingBehaviour<,>));
                 cfg.AddOpenBehavior(typeof(LoggingBehaviour<,>));
                 cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+                cfg.AddOpenBehavior(typeof(CommandTransactionBehavior<,>));
             });
             
             return services;
