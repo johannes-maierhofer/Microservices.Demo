@@ -1,7 +1,7 @@
 ﻿using BuildingBlocks.Messaging;
 using MediatR;
 using Customers.Domain.Customers;
-using BuildingBlocks.Contracts.Messages;
+using Customers.Messages.Events;
 
 namespace Customers.Features.Events
 {
@@ -16,7 +16,7 @@ namespace Customers.Features.Events
 
         public async Task Handle(CustomerCreatedEvent createdEvent, CancellationToken cancellationToken)
         {
-            var integrationEvent = new CustomerContracts.CustomerCreated(createdEvent.Customer.Id);
+            var integrationEvent = new CustomerCreated(createdEvent.Customer.Id);
             await _messageBus.Publish(integrationEvent, cancellationToken);
         }
     }

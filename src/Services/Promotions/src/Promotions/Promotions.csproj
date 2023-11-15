@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Customers.Messages\Customers.Messages.csproj" />
+    <ProjectReference Include="..\..\..\..\..\EmailSender.Messages\EmailSender.Messages.csproj" />
     <ProjectReference Include="..\..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,5 @@
-using BuildingBlocks.Contracts.Messages;
 using BuildingBlocks.Web;
+using EmailSender.Messages.Commands;
 using MassTransit;
 using Promotions;
 
@@ -10,7 +10,7 @@ builder.AddMinimalEndpoints(assemblies: typeof(PromotionsRoot).Assembly);
 builder.AddInfrastructure();
 
 // for using send we have to explicitly map endpoints
-EndpointConvention.Map<EmailSenderContracts.SendEmail>(new Uri("queue:email-sender-service--send-email"));
+EndpointConvention.Map<SendEmail>(new Uri("queue:email-sender-service--send-email"));
 
 var app = builder.Build();
 

@@ -1,12 +1,13 @@
-﻿using BuildingBlocks.Contracts.Messages;
-using BuildingBlocks.Messaging;
+﻿using BuildingBlocks.Messaging;
+using Customers.Messages.Events;
+using EmailSender.Messages.Commands;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using Promotions.Services;
 
 namespace Promotions.MessageConsumers
 {
-    public class CustomerCreatedConsumer : IConsumer<CustomerContracts.CustomerCreated>
+    public class CustomerCreatedConsumer : IConsumer<CustomerCreated>
     {
         private readonly ILogger<CustomerCreatedConsumer> _logger;
         private readonly ICustomerApiClient _apiClient;
@@ -22,18 +23,16 @@ namespace Promotions.MessageConsumers
             _bus = bus;
         }
 
-        public async Task Consume(ConsumeContext<CustomerContracts.CustomerCreated> context)
+        public async Task Consume(ConsumeContext<CustomerCreated> context)
         {
-            _logger.LogInformation($"Consume message of type {nameof(CustomerContracts.CustomerCreated)} with customerId: {context.Message.Id}.");
+            _logger.LogInformation($"Consume message of type {nameof(CustomerCreated)} with customerId: {context.Message.Id}.");
 
             var customerData = await _apiClient.GetCustomerById(context.Message.Id);
 
-            var sendEmailCmd = new EmailSenderContracts.SendEmail
-            {
-                Recipient = customerData.EmailAddress,
-                Subject = "Promo for new customers",
-                MessageText = $"Dear {customerData.FirstName}, we have some really cool offer for you as a new customer."
-            };
+            var sendEmailCmd = new SendEmail(
+                customerData.EmailAddress,
+                "Promo for new customers",
+                $"Dear {customerData.FirstName}, we have some really cool offer for you as a new customer.");
 
             await _bus.Send(sendEmailCmd);
         }
