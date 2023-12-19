@@ -22,8 +22,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\..\EmailSender.Messages\EmailSender.Messages.csproj" />
 		<ProjectReference Include="..\..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
+		<ProjectReference Include="..\EmailSender.Messages\EmailSender.Messages.csproj" />
 	</ItemGroup>
 
 </Project>
