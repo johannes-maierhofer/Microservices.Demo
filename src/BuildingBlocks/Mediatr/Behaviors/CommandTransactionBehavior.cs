@@ -1,5 +1,6 @@
-﻿using System.Transactions;
+﻿using BuildingBlocks.EfCore;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BuildingBlocks.Mediatr.Behaviors
 {
@@ -7,22 +8,33 @@ namespace BuildingBlocks.Mediatr.Behaviors
         where TRequest : class, ICommand<TResponse> 
         where TResponse : notnull
     {
+        private readonly IDbContext _dbContext;
+
+        public CommandTransactionBehavior(IDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
             CancellationToken cancellationToken)
         {
-            // see https://learn.microsoft.com/en-us/ef/core/saving/transactions#using-systemtransactions
-            using var scope = new TransactionScope(
-                TransactionScopeOption.Required,
-                new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
-                TransactionScopeAsyncFlowOption.Enabled);
+            // for Connection Resiliency
+            // see https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
 
-            var response = await next();
+            var response = default(TResponse);
 
-            // Commit transaction if all commands succeed, transaction will auto-rollback
-            // when disposed if either commands fails
-            scope.Complete();
+            var strategy = _dbContext.Database.CreateExecutionStrategy();
+            await strategy.ExecuteAsync(
+                async () =>
+                {
+                    await using var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
 
-            return response;
+                    response = await next();
+
+                    await transaction.CommitAsync(cancellationToken);
+                });
+
+            return response!;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BuildingBlocks.Configuration;
 using BuildingBlocks.Core.Domain.Events;
+using BuildingBlocks.EfCore;
 using BuildingBlocks.EfCore.Interceptors;
 using BuildingBlocks.HealthCheck;
 using BuildingBlocks.Logging;
@@ -32,7 +33,7 @@ namespace Customers
             });
 
             builder.Services.AddScoped<IDomainEventPublisher, DomainEventPublisher>();
-            builder.Services.AddScoped<DomainEventDispatchingInterceptor>(); // must be scoped
+            builder.Services.AddScoped<SavingChangesDomainEventDispatchingInterceptor>(); // must be scoped
 
             var sqlServerOptions = builder.Services.GetOptions<SqlServerOptions>("SqlServer");
             builder.Services.AddDbContext<CustomerDbContext>((serviceProvider, options) =>
@@ -42,9 +43,10 @@ namespace Customers
                         b => b.MigrationsAssembly(typeof(CustomerDbContext).Assembly.FullName));
 
                     // add interceptors
-                    options.AddInterceptors(serviceProvider.GetRequiredService<DomainEventDispatchingInterceptor>());
+                    options.AddInterceptors(serviceProvider.GetRequiredService<SavingChangesDomainEventDispatchingInterceptor>());
                 }
             );
+            builder.Services.AddScoped<IDbContext>(sp => sp.GetRequiredService<CustomerDbContext>());
 
             // builder.Services.AddJwt();
             builder.Services.AddHttpContextAccessor();

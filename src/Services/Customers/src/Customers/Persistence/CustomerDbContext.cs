@@ -1,11 +1,12 @@
-﻿using BuildingBlocks.EfCore.Conventions;
+﻿using BuildingBlocks.EfCore;
+using BuildingBlocks.EfCore.Conventions;
 using Customers.Domain.Customers;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace Customers.Persistence
 {
-    public class CustomerDbContext : DbContext
+    public class CustomerDbContext : DbContext, IDbContext
     {
         public CustomerDbContext(DbContextOptions<CustomerDbContext> options) 
             : base(options)

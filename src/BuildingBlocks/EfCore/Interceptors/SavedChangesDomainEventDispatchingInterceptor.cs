@@ -5,11 +5,14 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace BuildingBlocks.EfCore.Interceptors
 {
-    public class DomainEventDispatchingInterceptor : SaveChangesInterceptor
+    /// <summary>
+    /// Dispatches domain events after DbContext saved changes.
+    /// </summary>
+    public class SavedChangesDomainEventDispatchingInterceptor : SaveChangesInterceptor
     {
         private readonly IDomainEventPublisher _domainEventPublisher;
 
-        public DomainEventDispatchingInterceptor(IDomainEventPublisher domainEventPublisher)
+        public SavedChangesDomainEventDispatchingInterceptor(IDomainEventPublisher domainEventPublisher)
         {
             _domainEventPublisher = domainEventPublisher;
         }
