@@ -4,26 +4,27 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Customers.Features.Queries.GetCustomer
+namespace Customers.Features.Customers.Queries.GetCustomerDetails
 {
-    public class GetCustomerEndpoint : IMinimalEndpoint
+    public class GetCustomerDetailsEndpoint : IMinimalEndpoint
     {
         public IEndpointRouteBuilder MapEndpoint(IEndpointRouteBuilder builder)
         {
-            builder.MapGet($"{EndpointConfig.BaseApiPath}/customers/{{id}}", async (Guid id,
+            builder.MapGet($"{EndpointConfig.BaseApiPath}/customers/{{id}}", async (
+                    Guid id,
                     IMediator mediator,
                     CancellationToken cancellationToken) =>
                 {
-                    var result = await mediator.Send(new GetCustomerQuery(id), cancellationToken);
+                    var result = await mediator.Send(new GetCustomerDetailsQuery(id), cancellationToken);
                     return Results.Ok(result);
                 })
                 // .RequireAuthorization()
-                .WithName("GetCustomer")
+                .WithName("GetCustomerDetails")
                 .WithApiVersionSet(builder.NewApiVersionSet("Customers").Build())
-                .Produces<CustomerDto>()
+                .Produces<CustomerDetailsDto>()
                 .ProducesProblem(StatusCodes.Status404NotFound)
-                .WithSummary("Get customer")
-                .WithDescription("Get customer")
+                .WithSummary("Get customer details")
+                .WithDescription("Get customer details")
                 .WithOpenApi()
                 .HasApiVersion(1.0);
 

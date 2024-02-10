@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Core.Domain;
 
-namespace Customers.Domain.Customers
+namespace Customers.Domain.CustomerAggregate
 {
     public class Customer : Entity<Guid>
     {
@@ -39,6 +39,7 @@ namespace Customers.Domain.Customers
 #pragma warning disable CS8618
         private Customer()
         {
+            // for EF
         }
 #pragma warning restore CS8618
     }

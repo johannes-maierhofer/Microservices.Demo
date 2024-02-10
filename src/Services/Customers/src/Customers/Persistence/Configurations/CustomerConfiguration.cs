@@ -1,4 +1,4 @@
-﻿using Customers.Domain.Customers;
+﻿using Customers.Domain.CustomerAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,8 +11,9 @@ namespace Customers.Persistence.Configurations
             builder.ToTable("Customers");
             builder.HasKey(c => c.Id);
 
-            builder.Property(c => c.EmailAddress)
-                .HasMaxLength(320);
+            builder.Property(c => c.FirstName).HasMaxLength(200);
+            builder.Property(c => c.LastName).HasMaxLength(200);
+            builder.Property(c => c.EmailAddress).HasMaxLength(320);
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using BuildingBlocks.Messaging;
+using Customers.Domain.CustomerAggregate;
 using MediatR;
-using Customers.Domain.Customers;
 using Customers.Messages.Events;
 
-namespace Customers.Features.Events
+namespace Customers.Features.Customers.Events
 {
     public class CustomerCreatedIntegrationEventPublishingHandler : INotificationHandler<CustomerCreatedEvent>
     {

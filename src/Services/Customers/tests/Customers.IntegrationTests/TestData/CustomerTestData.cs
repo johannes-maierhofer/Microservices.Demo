@@ -1,4 +1,4 @@
-﻿using Customers.Domain.Customers;
+﻿using Customers.Domain.CustomerAggregate;
 
 namespace Customers.IntegrationTests.TestData
 {
