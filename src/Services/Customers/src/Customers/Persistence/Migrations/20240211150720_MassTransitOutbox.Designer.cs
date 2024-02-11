@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Customers.Persistence.Migrations
 {
     [DbContext(typeof(CustomerDbContext))]
-    [Migration("20231031170353_MassTransitOutbox")]
+    [Migration("20240211150720_MassTransitOutbox")]
     partial class MassTransitOutbox
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace Customers.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Customers.Domain.Customers.Customer", b =>
+            modelBuilder.Entity("Customers.Domain.CustomerAggregate.Customer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,7 +110,6 @@ namespace Customers.Persistence.Migrations
 
                     b.Property<string>("Body")
                         .IsRequired()
-                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContentType")
@@ -139,7 +138,6 @@ namespace Customers.Persistence.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Headers")
-                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("InboxConsumerId")
@@ -156,14 +154,12 @@ namespace Customers.Persistence.Migrations
 
                     b.Property<string>("MessageType")
                         .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("OutboxId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Properties")
-                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("RequestId")
