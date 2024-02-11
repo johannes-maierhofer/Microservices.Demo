@@ -10,11 +10,9 @@ namespace BuildingBlocks.Testing
     public class WebAppTestFixture<TEntryPoint> : IAsyncLifetime
         where TEntryPoint : class
     {
-        private readonly WebApplicationFactory<TEntryPoint> _factory;
-
         public WebAppTestFixture()
         {
-            _factory = new WebApplicationFactory<TEntryPoint>()
+            Factory = new WebApplicationFactory<TEntryPoint>()
                 .WithWebHostBuilder(builder =>
                 {
                     builder.UseEnvironment("test");
@@ -23,7 +21,9 @@ namespace BuildingBlocks.Testing
                 });
         }
 
-        public IServiceProvider ServiceProvider => _factory.Services;
+        public WebApplicationFactory<TEntryPoint> Factory { get; }
+
+        public IServiceProvider ServiceProvider => Factory.Services;
 
         protected virtual void AddCustomAppSettings(IConfigurationBuilder configuration)
         {
