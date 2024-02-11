@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -12,8 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+	<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
+	<PackageReference Include="Mapster" Version="7.4.0" />
+	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
+    
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -25,7 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Customers\Customers.csproj" />
+	<ProjectReference Include="..\..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
+	<ProjectReference Include="..\Customers.Messages\Customers.Messages.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +42,7 @@
   </ItemGroup>
 
   <Target Name="Generate OpenApi Specification Document" AfterTargets="Build">
-    <Exec Command="dotnet tool run swagger tofile --output swagger.json $(OutputPath)$(AssemblyName).dll v1" ContinueOnError="true" />
+    <Exec Command="dotnet tool run swagger tofile --output swagger.json $(OutputPath)$(AssemblyName).dll v1" ContinueOnError="true" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=SwaggerBuild" />
   </Target>
 
 </Project>

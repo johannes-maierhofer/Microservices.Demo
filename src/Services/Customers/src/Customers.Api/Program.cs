@@ -1,10 +1,10 @@
 using BuildingBlocks.Web;
-using Customers;
+using Customers.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.AddMinimalEndpoints(assemblies: typeof(CustomersRoot).Assembly);
+builder.AddMinimalEndpoints(assemblies: typeof(CustomersApiRoot).Assembly);
 builder.AddInfrastructure();
 
 var app = builder.Build();

@@ -52,7 +52,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CustomerListDtoPaginatedList"
+                  "$ref": "#/components/schemas/CustomerListResponse"
                 }
               }
             }
@@ -70,7 +70,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCustomerCommand"
+                "$ref": "#/components/schemas/CreateCustomerRequest"
               }
             }
           },
@@ -82,8 +82,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "uuid"
+                  "$ref": "#/components/schemas/CreateCustomerResponse"
                 }
               }
             }
@@ -127,7 +126,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CustomerDetailsDto"
+                  "$ref": "#/components/schemas/CustomerDetailsResponse"
                 }
               }
             }
@@ -148,7 +147,7 @@
   },
   "components": {
     "schemas": {
-      "CreateCustomerCommand": {
+      "CreateCustomerRequest": {
         "type": "object",
         "properties": {
           "firstName": {
@@ -166,7 +165,17 @@
         },
         "additionalProperties": false
       },
-      "CustomerDetailsDto": {
+      "CreateCustomerResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerDetailsResponse": {
         "type": "object",
         "properties": {
           "id": {
@@ -188,7 +197,7 @@
         },
         "additionalProperties": false
       },
-      "CustomerListDto": {
+      "CustomerListItem": {
         "type": "object",
         "properties": {
           "id": {
@@ -210,13 +219,13 @@
         },
         "additionalProperties": false
       },
-      "CustomerListDtoPaginatedList": {
+      "CustomerListResponse": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CustomerListDto"
+              "$ref": "#/components/schemas/CustomerListItem"
             },
             "nullable": true
           },
@@ -226,21 +235,11 @@
           },
           "totalPages": {
             "type": "integer",
-            "format": "int32",
-            "readOnly": true
+            "format": "int32"
           },
           "totalCount": {
             "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "hasPreviousPage": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "hasNextPage": {
-            "type": "boolean",
-            "readOnly": true
+            "format": "int32"
           }
         },
         "additionalProperties": false
