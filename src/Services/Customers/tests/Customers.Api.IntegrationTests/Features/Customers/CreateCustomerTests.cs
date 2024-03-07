@@ -1,4 +1,4 @@
-using Customers.SystemIntegrationTests.Clients;
+using Customers.Api.Client;
 using FluentAssertions;
 
 namespace Customers.Api.IntegrationTests.Features.Customers;

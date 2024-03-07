@@ -1,4 +1,4 @@
-﻿using Customers.SystemIntegrationTests.Clients;
+﻿using Customers.Api.Client;
 
 namespace Customers.Api.IntegrationTests
 {
