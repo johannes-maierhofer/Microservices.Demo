@@ -1,8 +1,8 @@
 ## Project References & Credits
-- [Booking Microservices - by Meysam Hamdeli](https://techcommunity.microsoft.com/t5/healthcare-and-life-sciences/auto-regenerating-api-client-for-your-open-api-project/ba-p/3302390)
+- [Booking Microservices - by Meysam Hamdeli](https://github.com/meysamhadeli/booking-microservices)
 
 ## Further reading
-- [Auto-Regenerating API Client for Your Open API Project](https://github.com/meysamhadeli/booking-microservices)
+- [Auto-Regenerating API Client for Your Open API Project](https://techcommunity.microsoft.com/t5/healthcare-and-life-sciences/auto-regenerating-api-client-for-your-open-api-project/ba-p/3302390)
 
 ## Todos
 - Add authentication
