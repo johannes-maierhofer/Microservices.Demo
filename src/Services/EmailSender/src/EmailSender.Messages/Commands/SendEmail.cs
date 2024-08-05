@@ -1,4 +1,4 @@
-﻿namespace EmailSender.Messages.Commands;
+﻿namespace Argo.MD.EmailSender.Messages.Commands;
 
 public record SendEmail(
     string Recipient,

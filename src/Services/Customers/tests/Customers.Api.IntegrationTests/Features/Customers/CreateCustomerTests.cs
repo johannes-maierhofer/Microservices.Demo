@@ -1,7 +1,7 @@
-using ApiClient = Argo.MD.Customers.Api.Client;
 using FluentAssertions;
+using ApiClient = Argo.MD.Customers.Api.Client;
 
-namespace Customers.Api.IntegrationTests.Features.Customers;
+namespace Argo.MD.Customers.Api.IntegrationTests.Features.Customers;
 
 public class CreateCustomerTests : AppTestBase
 {

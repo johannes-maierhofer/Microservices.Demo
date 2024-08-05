@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
-namespace BuildingBlocks.Core.Models;
+namespace Argo.MD.BuildingBlocks.Core.Models;
 
 public class PaginatedList<T>
 {

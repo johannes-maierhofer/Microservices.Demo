@@ -1,6 +1,6 @@
 ﻿using Argo.MD.Customers.Api.Client;
 
-namespace Customers.Api.IntegrationTests
+namespace Argo.MD.Customers.Api.IntegrationTests
 {
     [Collection("App")]
     public class AppTestBase : IAsyncLifetime

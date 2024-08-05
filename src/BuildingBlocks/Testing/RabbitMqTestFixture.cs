@@ -1,7 +1,7 @@
 ﻿using Testcontainers.RabbitMq;
 using Xunit;
 
-namespace BuildingBlocks.Testing
+namespace Argo.MD.BuildingBlocks.Testing
 {
     public sealed class RabbitMqTestFixture : IAsyncLifetime
     {

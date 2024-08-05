@@ -1,9 +1,9 @@
-﻿using BuildingBlocks.Core.Mappings;
-using Customers.Api.Contracts.Customers;
-using Customers.Api.Persistence;
+﻿using Argo.MD.BuildingBlocks.Core.Mappings;
+using Argo.MD.Customers.Api.Contracts.Customers;
+using Argo.MD.Customers.Api.Persistence;
 using MediatR;
 
-namespace Customers.Api.Features.Customers.Queries.GetCustomerList;
+namespace Argo.MD.Customers.Api.Features.Customers.Queries.GetCustomerList;
 
 public class GetCustomerListQueryHandler : IRequestHandler<GetCustomerListQuery, CustomerListResponse>
 {

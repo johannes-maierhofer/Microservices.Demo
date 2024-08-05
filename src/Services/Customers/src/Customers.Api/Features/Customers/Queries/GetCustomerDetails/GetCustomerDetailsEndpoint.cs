@@ -1,8 +1,8 @@
-﻿using BuildingBlocks.Web;
-using Customers.Api.Contracts.Customers;
+﻿using Argo.MD.BuildingBlocks.Web;
+using Argo.MD.Customers.Api.Contracts.Customers;
 using MediatR;
 
-namespace Customers.Api.Features.Customers.Queries.GetCustomerDetails;
+namespace Argo.MD.Customers.Api.Features.Customers.Queries.GetCustomerDetails;
 
 public class GetCustomerDetailsEndpoint : IMinimalEndpoint
 {

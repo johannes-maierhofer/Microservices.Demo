@@ -1,7 +1,7 @@
-﻿using BuildingBlocks.Core.Models;
+﻿using Argo.MD.BuildingBlocks.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BuildingBlocks.Core.Mappings;
+namespace Argo.MD.BuildingBlocks.Core.Mappings;
 
 public static class MappingExtensions
 {

@@ -1,4 +1,4 @@
-﻿namespace Customers.Api.Contracts.Customers;
+﻿namespace Argo.MD.Customers.Api.Contracts.Customers;
 
 public record CustomerListResponse(
     List<CustomerListItem> Items,

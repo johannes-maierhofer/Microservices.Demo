@@ -1,4 +1,4 @@
-﻿namespace Customers.Messages.Events
+﻿namespace Argo.MD.Customers.Messages.Events
 {
     public record CustomerCreated(Guid Id);
 }

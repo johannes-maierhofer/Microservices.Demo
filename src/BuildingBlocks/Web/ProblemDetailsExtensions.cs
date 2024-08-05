@@ -1,4 +1,4 @@
-using BuildingBlocks.Core.Exceptions;
+using Argo.MD.BuildingBlocks.Core.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace BuildingBlocks.Web;
+namespace Argo.MD.BuildingBlocks.Web;
 
 public static class ProblemDetailsExtensions
 {

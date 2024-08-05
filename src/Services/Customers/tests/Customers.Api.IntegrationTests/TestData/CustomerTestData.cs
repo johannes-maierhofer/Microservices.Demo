@@ -1,6 +1,6 @@
-﻿using Customers.Api.Domain.CustomerAggregate;
+﻿using Argo.MD.Customers.Api.Domain.CustomerAggregate;
 
-namespace Customers.Api.IntegrationTests.TestData
+namespace Argo.MD.Customers.Api.IntegrationTests.TestData
 {
     public static class CustomerTestData
     {

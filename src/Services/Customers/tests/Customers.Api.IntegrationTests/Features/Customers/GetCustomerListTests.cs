@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace Customers.Api.IntegrationTests.Features.Customers;
+namespace Argo.MD.Customers.Api.IntegrationTests.Features.Customers;
 
 public class GetCustomerListTests : AppTestBase
 {

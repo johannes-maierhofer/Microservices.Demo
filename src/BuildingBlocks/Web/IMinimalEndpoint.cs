@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Routing;
 
-namespace BuildingBlocks.Web;
+namespace Argo.MD.BuildingBlocks.Web;
 
 public interface IMinimalEndpoint
 {

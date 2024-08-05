@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Serilog.Events;
 
-namespace BuildingBlocks.Logging
+namespace Argo.MD.BuildingBlocks.Logging
 {
     public static class LogHelper
     {

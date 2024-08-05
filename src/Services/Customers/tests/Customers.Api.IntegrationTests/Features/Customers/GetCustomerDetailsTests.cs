@@ -1,7 +1,7 @@
-﻿using Customers.Api.IntegrationTests.TestData;
+﻿using Argo.MD.Customers.Api.IntegrationTests.TestData;
 using FluentAssertions;
 
-namespace Customers.Api.IntegrationTests.Features.Customers;
+namespace Argo.MD.Customers.Api.IntegrationTests.Features.Customers;
 
 public class GetCustomerDetailsTests : AppTestBase
 {

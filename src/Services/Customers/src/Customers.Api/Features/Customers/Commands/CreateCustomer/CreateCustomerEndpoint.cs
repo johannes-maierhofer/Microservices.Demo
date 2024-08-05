@@ -1,9 +1,9 @@
-﻿using BuildingBlocks.Web;
-using Customers.Api.Contracts.Customers;
+﻿using Argo.MD.BuildingBlocks.Web;
+using Argo.MD.Customers.Api.Contracts.Customers;
 using Mapster;
 using MediatR;
 
-namespace Customers.Api.Features.Customers.Commands.CreateCustomer;
+namespace Argo.MD.Customers.Api.Features.Customers.Commands.CreateCustomer;
 
 public class CreateCustomerEndpoint : IMinimalEndpoint
 {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace BuildingBlocks.Core.Domain.Events
+namespace Argo.MD.BuildingBlocks.Core.Domain.Events
 {
     public class DomainEventPublisher : IDomainEventPublisher
     {

@@ -1,5 +1,5 @@
-using BuildingBlocks.Web;
-using Customers.Api;
+using Argo.MD.BuildingBlocks.Web;
+using Argo.MD.Customers.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +17,7 @@ app.UseDatabase();
 
 app.Run();
 
-namespace Customers.Api
+namespace Argo.MD.Customers.Api
 {
     public partial class Program
     {

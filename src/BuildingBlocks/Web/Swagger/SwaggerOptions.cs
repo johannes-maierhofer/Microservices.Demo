@@ -1,4 +1,4 @@
-namespace BuildingBlocks.Web.Swagger
+namespace Argo.MD.BuildingBlocks.Web.Swagger
 {
     public class SwaggerOptions
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace BuildingBlocks.EfCore
+namespace Argo.MD.BuildingBlocks.EfCore
 {
     /// <summary>
     /// Abstraction of DbContext to be used in BuildingBlocks

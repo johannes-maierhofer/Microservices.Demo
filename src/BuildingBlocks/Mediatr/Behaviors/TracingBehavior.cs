@@ -1,7 +1,7 @@
-﻿using BuildingBlocks.Tracing;
+﻿using Argo.MD.BuildingBlocks.Tracing;
 using MediatR;
 
-namespace BuildingBlocks.Mediatr.Behaviors
+namespace Argo.MD.BuildingBlocks.Mediatr.Behaviors
 {
     public class TracingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : ICommand<TResponse>

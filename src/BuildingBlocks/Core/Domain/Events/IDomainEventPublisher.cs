@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Core.Domain.Events
+﻿namespace Argo.MD.BuildingBlocks.Core.Domain.Events
 {
     public interface IDomainEventPublisher
     {

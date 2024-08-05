@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
-using BuildingBlocks.Utils;
+using Argo.MD.BuildingBlocks.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 
-namespace BuildingBlocks.Web;
+namespace Argo.MD.BuildingBlocks.Web;
 
 public static class MinimalApiExtensions
 {

@@ -1,21 +1,21 @@
-﻿using BuildingBlocks.Configuration;
-using BuildingBlocks.HealthCheck;
-using BuildingBlocks.Logging;
-using BuildingBlocks.Mediatr;
-using BuildingBlocks.Messaging.MassTransit;
-using BuildingBlocks.Tracing.OpenTelemetry;
-using BuildingBlocks.Web;
-using BuildingBlocks.Web.Swagger;
+﻿using Argo.MD.BuildingBlocks.Configuration;
+using Argo.MD.BuildingBlocks.HealthCheck;
+using Argo.MD.BuildingBlocks.Logging;
+using Argo.MD.BuildingBlocks.Mediatr;
+using Argo.MD.BuildingBlocks.Messaging.MassTransit;
+using Argo.MD.BuildingBlocks.Tracing.OpenTelemetry;
+using Argo.MD.BuildingBlocks.Web;
+using Argo.MD.BuildingBlocks.Web.Swagger;
+using Argo.MD.Promotions.Config;
+using Argo.MD.Promotions.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Promotions.Config;
-using Promotions.Services;
 
-namespace Promotions
+namespace Argo.MD.Promotions
 {
     public static class ConfigurationExtensions
     {

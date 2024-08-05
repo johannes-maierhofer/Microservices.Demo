@@ -1,9 +1,9 @@
-﻿using BuildingBlocks.Messaging;
-using Customers.Api.Domain.CustomerAggregate;
-using Customers.Messages.Events;
+﻿using Argo.MD.BuildingBlocks.Messaging;
+using Argo.MD.Customers.Api.Domain.CustomerAggregate;
+using Argo.MD.Customers.Messages.Events;
 using MediatR;
 
-namespace Customers.Api.Features.Customers.Events;
+namespace Argo.MD.Customers.Api.Features.Customers.Events;
 
 public class CustomerCreatedIntegrationEventPublishingHandler : INotificationHandler<CustomerCreatedEvent>
 {

@@ -1,9 +1,9 @@
-﻿using BuildingBlocks.Web;
-using Customers.Api.Contracts.Customers;
+﻿using Argo.MD.BuildingBlocks.Web;
+using Argo.MD.Customers.Api.Contracts.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Customers.Api.Features.Customers.Queries.GetCustomerList;
+namespace Argo.MD.Customers.Api.Features.Customers.Queries.GetCustomerList;
 
 public class GetCustomerListEndpoint : IMinimalEndpoint
 {

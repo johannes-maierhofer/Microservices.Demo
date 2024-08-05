@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Messaging
+﻿namespace Argo.MD.BuildingBlocks.Messaging
 {
     public interface IMessageBus
     {

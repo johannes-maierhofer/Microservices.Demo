@@ -1,9 +1,9 @@
-﻿using BuildingBlocks.Core.Domain;
-using BuildingBlocks.Core.Domain.Events;
+﻿using Argo.MD.BuildingBlocks.Core.Domain;
+using Argo.MD.BuildingBlocks.Core.Domain.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace BuildingBlocks.EfCore.Interceptors
+namespace Argo.MD.BuildingBlocks.EfCore.Interceptors
 {
     /// <summary>
     /// Dispatches domain events before DbContext saves changes.

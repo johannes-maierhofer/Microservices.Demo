@@ -1,4 +1,4 @@
-namespace BuildingBlocks.Messaging.MassTransit;
+namespace Argo.MD.BuildingBlocks.Messaging.MassTransit;
 
 public class RabbitMqOptions
 {

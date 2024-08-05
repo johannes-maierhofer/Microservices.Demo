@@ -1,6 +1,6 @@
-﻿using BuildingBlocks.Core.Domain.Events;
+﻿using Argo.MD.BuildingBlocks.Core.Domain.Events;
 
-namespace Customers.Api.Domain.CustomerAggregate;
+namespace Argo.MD.Customers.Api.Domain.CustomerAggregate;
 
 public class CustomerCreatedEvent : DomainEvent
 {

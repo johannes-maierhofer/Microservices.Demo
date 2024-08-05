@@ -1,8 +1,8 @@
-﻿using BuildingBlocks.Mediatr.Behaviors;
+﻿using System.Reflection;
+using Argo.MD.BuildingBlocks.Mediatr.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
-namespace BuildingBlocks.Mediatr
+namespace Argo.MD.BuildingBlocks.Mediatr
 {
     public static class ServiceExtensions
     {

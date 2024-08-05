@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.HealthCheck;
+﻿namespace Argo.MD.BuildingBlocks.HealthCheck;
 
 public class HealthOptions
 {

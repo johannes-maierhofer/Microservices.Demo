@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
-using BuildingBlocks.Logging;
-using BuildingBlocks.Messaging.MassTransit;
-using BuildingBlocks.Tracing.OpenTelemetry;
+using Argo.MD.BuildingBlocks.Logging;
+using Argo.MD.BuildingBlocks.Messaging.MassTransit;
+using Argo.MD.BuildingBlocks.Tracing.OpenTelemetry;
 using Microsoft.Extensions.Hosting;
 
 var hostBuilder = Host.CreateApplicationBuilder(args);

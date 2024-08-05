@@ -1,6 +1,6 @@
 ﻿using Asp.Versioning.Builder;
 
-namespace BuildingBlocks.Web
+namespace Argo.MD.BuildingBlocks.Web
 {
     public class EndpointConfig
     {

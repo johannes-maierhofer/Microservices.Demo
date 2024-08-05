@@ -1,6 +1,6 @@
 using FluentValidation.Results;
 
-namespace BuildingBlocks.Core.Exceptions
+namespace Argo.MD.BuildingBlocks.Core.Exceptions
 {
     public class ValidationException : CustomException
     {

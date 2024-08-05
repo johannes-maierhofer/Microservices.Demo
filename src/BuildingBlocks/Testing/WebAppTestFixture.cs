@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace BuildingBlocks.Testing
+namespace Argo.MD.BuildingBlocks.Testing
 {
     public class WebAppTestFixture<TEntryPoint> : IAsyncLifetime
         where TEntryPoint : class

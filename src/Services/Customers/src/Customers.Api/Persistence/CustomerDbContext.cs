@@ -1,8 +1,8 @@
-﻿using BuildingBlocks.EfCore;
+﻿using Argo.MD.BuildingBlocks.EfCore;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
-namespace Customers.Api.Persistence;
+namespace Argo.MD.Customers.Api.Persistence;
 
 public class CustomerDbContext : DbContext, IDbContext
 {

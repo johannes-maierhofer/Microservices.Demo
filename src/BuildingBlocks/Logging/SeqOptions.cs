@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Logging
+﻿namespace Argo.MD.BuildingBlocks.Logging
 {
     public class SeqOptions
     {

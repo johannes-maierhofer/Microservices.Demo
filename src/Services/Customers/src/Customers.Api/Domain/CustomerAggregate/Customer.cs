@@ -1,6 +1,6 @@
-﻿using BuildingBlocks.Core.Domain;
+﻿using Argo.MD.BuildingBlocks.Core.Domain;
 
-namespace Customers.Api.Domain.CustomerAggregate;
+namespace Argo.MD.Customers.Api.Domain.CustomerAggregate;
 
 public class Customer : Entity<Guid>
 {

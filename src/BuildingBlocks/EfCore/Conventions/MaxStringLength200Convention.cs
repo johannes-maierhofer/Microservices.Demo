@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-namespace BuildingBlocks.EfCore.Conventions
+namespace Argo.MD.BuildingBlocks.EfCore.Conventions
 {
     // see https://www.codemag.com/Article/2211072/EF-Core-7-It-Just-Keeps-Getting-Better
     public class MaxStringLength200Convention : IModelFinalizingConvention

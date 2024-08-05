@@ -1,4 +1,4 @@
-namespace BuildingBlocks.Configuration;
+namespace Argo.MD.BuildingBlocks.Configuration;
 
 public class AppOptions
 {

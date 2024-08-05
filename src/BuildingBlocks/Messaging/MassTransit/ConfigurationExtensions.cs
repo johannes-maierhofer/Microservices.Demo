@@ -1,12 +1,12 @@
 using System.Reflection;
-using BuildingBlocks.Configuration;
+using Argo.MD.BuildingBlocks.Configuration;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace BuildingBlocks.Messaging.MassTransit;
+namespace Argo.MD.BuildingBlocks.Messaging.MassTransit;
 
 public static class ConfigurationExtensions
 {

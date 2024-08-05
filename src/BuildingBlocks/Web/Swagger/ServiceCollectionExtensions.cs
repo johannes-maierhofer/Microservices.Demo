@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 
-namespace BuildingBlocks.Web.Swagger;
+namespace Argo.MD.BuildingBlocks.Web.Swagger;
 
 public static class ServiceCollectionExtensions
 {

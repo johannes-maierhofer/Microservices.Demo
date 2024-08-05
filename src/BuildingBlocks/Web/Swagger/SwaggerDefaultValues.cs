@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace BuildingBlocks.Web.Swagger
+namespace Argo.MD.BuildingBlocks.Web.Swagger
 {
     public class SwaggerDefaultValues : IOperationFilter
     {

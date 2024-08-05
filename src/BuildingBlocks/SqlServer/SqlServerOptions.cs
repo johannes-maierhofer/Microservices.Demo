@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.SqlServer
+﻿namespace Argo.MD.BuildingBlocks.SqlServer
 {
     public class SqlServerOptions
     {

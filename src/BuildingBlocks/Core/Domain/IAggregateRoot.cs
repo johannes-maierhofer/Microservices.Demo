@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Core.Domain
+﻿namespace Argo.MD.BuildingBlocks.Core.Domain
 {
     public interface IAggregateRoot
     {

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace BuildingBlocks.Tracing
+namespace Argo.MD.BuildingBlocks.Tracing
 {
     /*
      * ref. https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing-instrumentation-walkthroughs

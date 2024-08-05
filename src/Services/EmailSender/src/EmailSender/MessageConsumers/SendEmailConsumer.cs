@@ -1,8 +1,8 @@
-﻿using EmailSender.Messages.Commands;
+﻿using Argo.MD.EmailSender.Messages.Commands;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace EmailSender.MessageConsumers
+namespace Argo.MD.EmailSender.MessageConsumers
 {
     public class SendEmailConsumer : IConsumer<SendEmail>
     {

@@ -2,7 +2,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-namespace BuildingBlocks.Utils;
+namespace Argo.MD.BuildingBlocks.Utils;
 
 public static class TypeProvider
 {

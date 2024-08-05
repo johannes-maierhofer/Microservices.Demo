@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using BuildingBlocks.Core.Domain.Events;
+using Argo.MD.BuildingBlocks.Core.Domain.Events;
 
-namespace BuildingBlocks.Core.Domain
+namespace Argo.MD.BuildingBlocks.Core.Domain
 {
     public abstract class Entity<TId> : IHasDomainEvents
         where TId : struct

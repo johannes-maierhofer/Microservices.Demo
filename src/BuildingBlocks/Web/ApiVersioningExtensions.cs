@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BuildingBlocks.Web;
+namespace Argo.MD.BuildingBlocks.Web;
 
 public static class ApiVersioningExtensions
 {

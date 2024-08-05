@@ -1,6 +1,6 @@
-﻿using BuildingBlocks.Core.Domain.Events;
+﻿using Argo.MD.BuildingBlocks.Core.Domain.Events;
 
-namespace BuildingBlocks.Core.Domain
+namespace Argo.MD.BuildingBlocks.Core.Domain
 {
     public interface IHasDomainEvents
     {

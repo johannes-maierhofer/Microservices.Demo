@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace BuildingBlocks.Mediatr;
+namespace Argo.MD.BuildingBlocks.Mediatr;
 
 public interface ICommand : ICommand<Unit>
 {

@@ -1,4 +1,4 @@
-﻿namespace Promotions.Models
+﻿namespace Argo.MD.Promotions.Models
 {
     public class CustomerData
     {

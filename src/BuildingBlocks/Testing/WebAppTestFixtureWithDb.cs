@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Respawn;
 
-namespace BuildingBlocks.Testing
+namespace Argo.MD.BuildingBlocks.Testing
 {
     public class WebAppTestFixtureWithDb<TEntryPoint, TDbContext> : WebAppTestFixture<TEntryPoint>
         where TEntryPoint : class

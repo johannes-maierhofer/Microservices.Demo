@@ -2,7 +2,7 @@
 using DotNet.Testcontainers.Containers;
 using Xunit;
 
-namespace BuildingBlocks.Testing
+namespace Argo.MD.BuildingBlocks.Testing
 {
     // see Enhance "Integration tests in ASP.NET Core" by leveraging Testcontainers
     // at https://github.com/dotnet/AspNetCore.Docs/pull/28531/files

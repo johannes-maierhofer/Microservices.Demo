@@ -1,6 +1,6 @@
-﻿using BuildingBlocks.Mediatr;
+﻿using Argo.MD.BuildingBlocks.Mediatr;
 
-namespace Customers.Api.Features.Customers.Commands.CreateCustomer;
+namespace Argo.MD.Customers.Api.Features.Customers.Commands.CreateCustomer;
 
 public record CreateCustomerCommand(
     string FirstName,

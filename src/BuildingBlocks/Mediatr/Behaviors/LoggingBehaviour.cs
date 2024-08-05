@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace BuildingBlocks.Mediatr.Behaviors
+namespace Argo.MD.BuildingBlocks.Mediatr.Behaviors
 {
     public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

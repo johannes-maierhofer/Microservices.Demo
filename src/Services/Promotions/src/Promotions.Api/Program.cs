@@ -1,7 +1,7 @@
-using BuildingBlocks.Web;
-using EmailSender.Messages.Commands;
+using Argo.MD.BuildingBlocks.Web;
+using Argo.MD.EmailSender.Messages.Commands;
+using Argo.MD.Promotions;
 using MassTransit;
-using Promotions;
 
 var builder = WebApplication.CreateBuilder(args);
 

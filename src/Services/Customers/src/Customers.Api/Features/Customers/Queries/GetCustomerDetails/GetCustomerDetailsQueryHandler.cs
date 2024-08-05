@@ -1,10 +1,10 @@
-﻿using BuildingBlocks.Core.Exceptions;
-using Customers.Api.Contracts.Customers;
-using Customers.Api.Persistence;
+﻿using Argo.MD.BuildingBlocks.Core.Exceptions;
+using Argo.MD.Customers.Api.Contracts.Customers;
+using Argo.MD.Customers.Api.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Customers.Api.Features.Customers.Queries.GetCustomerDetails;
+namespace Argo.MD.Customers.Api.Features.Customers.Queries.GetCustomerDetails;
 
 public class GetCustomerDetailsQueryHandler : IRequestHandler<GetCustomerDetailsQuery, CustomerDetailsResponse>
 {

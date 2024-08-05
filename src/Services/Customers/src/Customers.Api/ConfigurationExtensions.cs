@@ -1,22 +1,22 @@
-﻿using BuildingBlocks.Configuration;
-using BuildingBlocks.Core.Domain.Events;
-using BuildingBlocks.EfCore;
-using BuildingBlocks.EfCore.Interceptors;
-using BuildingBlocks.HealthCheck;
-using BuildingBlocks.Logging;
-using BuildingBlocks.Mediatr;
-using BuildingBlocks.Messaging.MassTransit;
-using BuildingBlocks.SqlServer;
-using BuildingBlocks.Tracing.OpenTelemetry;
-using BuildingBlocks.Web;
-using BuildingBlocks.Web.Swagger;
-using Customers.Api.Persistence;
+﻿using Argo.MD.BuildingBlocks.Configuration;
+using Argo.MD.BuildingBlocks.Core.Domain.Events;
+using Argo.MD.BuildingBlocks.EfCore;
+using Argo.MD.BuildingBlocks.EfCore.Interceptors;
+using Argo.MD.BuildingBlocks.HealthCheck;
+using Argo.MD.BuildingBlocks.Logging;
+using Argo.MD.BuildingBlocks.Mediatr;
+using Argo.MD.BuildingBlocks.Messaging.MassTransit;
+using Argo.MD.BuildingBlocks.SqlServer;
+using Argo.MD.BuildingBlocks.Tracing.OpenTelemetry;
+using Argo.MD.BuildingBlocks.Web;
+using Argo.MD.BuildingBlocks.Web.Swagger;
+using Argo.MD.Customers.Api.Persistence;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace Customers.Api;
+namespace Argo.MD.Customers.Api;
 
 public static class ConfigurationExtensions
 {

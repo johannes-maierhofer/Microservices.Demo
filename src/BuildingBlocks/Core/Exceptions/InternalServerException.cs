@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Net;
 
-namespace BuildingBlocks.Core.Exceptions
+namespace Argo.MD.BuildingBlocks.Core.Exceptions
 {
     public class InternalServerException : CustomException
     {

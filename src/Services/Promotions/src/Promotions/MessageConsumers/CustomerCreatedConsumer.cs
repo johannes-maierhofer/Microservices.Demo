@@ -1,11 +1,11 @@
-﻿using BuildingBlocks.Messaging;
-using Customers.Messages.Events;
-using EmailSender.Messages.Commands;
+﻿using Argo.MD.BuildingBlocks.Messaging;
+using Argo.MD.Customers.Messages.Events;
+using Argo.MD.EmailSender.Messages.Commands;
+using Argo.MD.Promotions.Services;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using Promotions.Services;
 
-namespace Promotions.MessageConsumers
+namespace Argo.MD.Promotions.MessageConsumers
 {
     public class CustomerCreatedConsumer : IConsumer<CustomerCreated>
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Customers.Api.Persistence.Configurations;
+namespace Argo.MD.Customers.Api.Persistence.Configurations;
 
 public class CustomerConfiguration : IEntityTypeConfiguration<Domain.CustomerAggregate.Customer>
 {

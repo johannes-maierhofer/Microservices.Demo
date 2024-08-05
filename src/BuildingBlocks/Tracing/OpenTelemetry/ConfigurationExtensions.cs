@@ -1,11 +1,11 @@
 using System.Diagnostics;
-using BuildingBlocks.Configuration;
-using BuildingBlocks.Logging;
+using Argo.MD.BuildingBlocks.Configuration;
+using Argo.MD.BuildingBlocks.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace BuildingBlocks.Tracing.OpenTelemetry;
+namespace Argo.MD.BuildingBlocks.Tracing.OpenTelemetry;
 
 /*
  * ref. https://github.com/open-telemetry/opentelemetry-dotnet-contrib/issues/326

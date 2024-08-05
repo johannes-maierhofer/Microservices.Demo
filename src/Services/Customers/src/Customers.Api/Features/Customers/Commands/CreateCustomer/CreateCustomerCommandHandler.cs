@@ -1,7 +1,7 @@
-﻿using Customers.Api.Persistence;
+﻿using Argo.MD.Customers.Api.Persistence;
 using MediatR;
 
-namespace Customers.Api.Features.Customers.Commands.CreateCustomer;
+namespace Argo.MD.Customers.Api.Features.Customers.Commands.CreateCustomer;
 
 public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Guid>
 {

@@ -1,4 +1,4 @@
-﻿namespace Customers.Api.IntegrationTests
+﻿namespace Argo.MD.Customers.Api.IntegrationTests
 {
     [CollectionDefinition("App")]
     public class AppTestCollection : ICollectionFixture<AppTestFixture>

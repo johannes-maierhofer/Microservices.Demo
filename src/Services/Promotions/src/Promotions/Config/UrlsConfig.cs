@@ -1,4 +1,4 @@
-﻿namespace Promotions.Config
+﻿namespace Argo.MD.Promotions.Config
 {
     public class UrlsConfig
     {

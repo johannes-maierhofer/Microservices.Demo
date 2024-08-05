@@ -1,7 +1,7 @@
 using FluentValidation;
 using MediatR;
 
-namespace BuildingBlocks.Mediatr.Behaviors;
+namespace Argo.MD.BuildingBlocks.Mediatr.Behaviors;
 
 public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : class, IRequest<TResponse>

@@ -1,6 +1,6 @@
-﻿using BuildingBlocks.Configuration;
-using BuildingBlocks.Messaging.MassTransit;
-using BuildingBlocks.SqlServer;
+﻿using Argo.MD.BuildingBlocks.Configuration;
+using Argo.MD.BuildingBlocks.Messaging.MassTransit;
+using Argo.MD.BuildingBlocks.SqlServer;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace BuildingBlocks.HealthCheck;
+namespace Argo.MD.BuildingBlocks.HealthCheck;
 
 public static class ConfigurationExtensions
 {

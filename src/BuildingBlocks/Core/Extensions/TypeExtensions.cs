@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Core.Extensions
+﻿namespace Argo.MD.BuildingBlocks.Core.Extensions
 {
     public static class TypeExtensions
     {

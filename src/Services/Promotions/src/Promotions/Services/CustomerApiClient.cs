@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
+using Argo.MD.Promotions.Config;
+using Argo.MD.Promotions.Models;
 using Microsoft.Extensions.Options;
-using Promotions.Config;
-using Promotions.Models;
 
-namespace Promotions.Services
+namespace Argo.MD.Promotions.Services
 {
     public class CustomerApiClient : ICustomerApiClient
     {

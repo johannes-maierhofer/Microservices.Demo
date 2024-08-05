@@ -1,8 +1,8 @@
-﻿using BuildingBlocks.EfCore;
+﻿using Argo.MD.BuildingBlocks.EfCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace BuildingBlocks.Mediatr.Behaviors
+namespace Argo.MD.BuildingBlocks.Mediatr.Behaviors
 {
     public class CommandTransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : class, ICommand<TResponse> 

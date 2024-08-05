@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Configuration;
+﻿using Argo.MD.BuildingBlocks.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -6,7 +6,7 @@ using Serilog.Enrichers.Span;
 using Serilog.Events;
 using Serilog.Exceptions;
 
-namespace BuildingBlocks.Logging
+namespace Argo.MD.BuildingBlocks.Logging
 {
     public static class SerilogExtensions
     {

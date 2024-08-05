@@ -1,6 +1,6 @@
 ﻿using MassTransit;
 
-namespace BuildingBlocks.Messaging.MassTransit
+namespace Argo.MD.BuildingBlocks.Messaging.MassTransit
 {
     public class MassTransitMessageBus : IMessageBus
     {

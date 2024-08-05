@@ -1,8 +1,8 @@
-﻿using BuildingBlocks.Testing;
-using Customers.Api.IntegrationTests.TestData;
-using Customers.Api.Persistence;
+﻿using Argo.MD.BuildingBlocks.Testing;
+using Argo.MD.Customers.Api.IntegrationTests.TestData;
+using Argo.MD.Customers.Api.Persistence;
 
-namespace Customers.Api.IntegrationTests;
+namespace Argo.MD.Customers.Api.IntegrationTests;
 
 public class AppTestFixture : WebAppTestFixtureWithDb<Program, CustomerDbContext>
 {

@@ -1,6 +1,6 @@
-﻿using Promotions.Models;
+﻿using Argo.MD.Promotions.Models;
 
-namespace Promotions.Services
+namespace Argo.MD.Promotions.Services
 {
     public interface ICustomerApiClient
     {
