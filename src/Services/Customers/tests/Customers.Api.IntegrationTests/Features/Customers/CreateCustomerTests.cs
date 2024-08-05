@@ -1,4 +1,4 @@
-using Customers.Api.Client;
+using ApiClient = Argo.MD.Customers.Api.Client;
 using FluentAssertions;
 
 namespace Customers.Api.IntegrationTests.Features.Customers;
@@ -16,7 +16,7 @@ public class CreateCustomerTests : AppTestBase
         var client = CreateCustomerClient();
 
         // Act
-        var response = await client.CreateCustomerAsync(new CreateCustomerRequest
+        var response = await client.CreateCustomerAsync(new ApiClient.CreateCustomerRequest
         {
             FirstName = "Herbert",
             LastName = "Hofer",

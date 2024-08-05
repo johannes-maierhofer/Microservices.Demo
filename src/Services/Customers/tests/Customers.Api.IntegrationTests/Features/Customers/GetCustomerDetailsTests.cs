@@ -17,7 +17,7 @@ public class GetCustomerDetailsTests : AppTestBase
         var client = CreateCustomerClient();
 
         // Act
-        var response = await client.GetCustomerDetailsAsync(expectedCustomer.Id.ToString());
+        var response = await client.GetCustomerDetailsAsync(expectedCustomer.Id);
 
         // Assert
         response.Should().NotBeNull();

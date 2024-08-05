@@ -1,4 +1,4 @@
-﻿using Customers.Api.Client;
+﻿using Argo.MD.Customers.Api.Client;
 
 namespace Customers.Api.IntegrationTests
 {

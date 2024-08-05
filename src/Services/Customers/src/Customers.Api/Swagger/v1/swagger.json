@@ -27,7 +27,6 @@
             "name": "pageNumber",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -38,7 +37,6 @@
             "name": "pageSize",
             "in": "query",
             "required": true,
-            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -113,9 +111,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "string",
+              "format": "uuid",
               "default": null
             }
           }

@@ -12,7 +12,7 @@ namespace BuildingBlocks.Testing
         private const string Username = "sa";
         private const string Password = "str0ngp@ssword";
         private const ushort MsSqlPort = 1433;
-        private const ushort HostPort = 58825;
+        private const ushort HostPort = 51823;
         private readonly IContainer _mssqlContainer = new ContainerBuilder()
             .WithImage("mcr.microsoft.com/mssql/server:2019-latest")
             .WithName("mssql-" + Guid.NewGuid())

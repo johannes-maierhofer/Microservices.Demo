@@ -1,0 +1,19 @@
+<Project>
+	<PropertyGroup>
+		<TargetFrameworkVersion>net8.0</TargetFrameworkVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+		<TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+		<AssemblyName>Argo.MD.$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>Argo.MD.$(MSBuildProjectName)</RootNamespace>
+	</PropertyGroup>
+
+	<!-- NuGet -->
+	<PropertyGroup>
+		<NuGetAudit>true</NuGetAudit>
+		<NuGetAuditLevel>moderate</NuGetAuditLevel>
+		<NuGetAuditMode>all</NuGetAuditMode>
+	</PropertyGroup>
+
+</Project>
