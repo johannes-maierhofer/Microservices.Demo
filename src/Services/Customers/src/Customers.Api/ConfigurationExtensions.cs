@@ -51,7 +51,6 @@ public static class ConfigurationExtensions
         builder.Services.AddValidatorsFromAssembly(typeof(CustomersApiRoot).Assembly);
         builder.Services.AddProblemDetails();
         //builder.Services.AddCustomMapster(typeof(CustomerApiRoot).Assembly);
-        builder.Services.AddCustomHealthCheck();
         builder.Services.AddCustomSerilog(builder.Configuration);
         builder.Services.AddCustomMassTransit<CustomerDbContext>(
             builder.Configuration,
@@ -59,6 +58,11 @@ public static class ConfigurationExtensions
             typeof(CustomersApiRoot).Assembly);
         builder.Services.AddCustomOpenTelemetry();
         // builder.Services.AddTransient<AuthHeaderHandler>();
+
+        if(builder.Environment.UseHealthChecks())
+        {
+            builder.Services.AddCustomHealthCheck();
+        }
 
         return builder;
     }
@@ -76,7 +80,12 @@ public static class ConfigurationExtensions
         //app.UseCorrelationId();
         //app.UseHttpMetrics();
         //app.UseMigrationPersistMessage<PersistMessageDbContext>(env);
-        app.UseCustomHealthCheck();
+
+        if (app.Environment.UseHealthChecks())
+        {
+            app.UseCustomHealthCheck();
+        }
+        
         //app.MapMetrics();
         app.MapGet("/", x => x.Response.WriteAsync(appOptions.Name));
 

@@ -48,11 +48,15 @@ namespace Argo.MD.Promotions
             // builder.Services.AddValidatorsFromAssembly(typeof(PromotionsRoot).Assembly);
             builder.Services.AddProblemDetails();
             //builder.Services.AddCustomMapster(typeof(PromotionsRoot).Assembly);
-            builder.Services.AddCustomHealthCheck();
             builder.Services.AddCustomSerilog(builder.Configuration);
             builder.Services.AddCustomMassTransit(builder.Configuration, builder.Environment, typeof(PromotionsRoot).Assembly);
             builder.Services.AddCustomOpenTelemetry();
             // builder.Services.AddTransient<AuthHeaderHandler>();
+
+            if (builder.Environment.UseHealthChecks())
+            {
+                builder.Services.AddCustomHealthCheck();
+            }
 
             return builder;
         }
@@ -70,7 +74,12 @@ namespace Argo.MD.Promotions
             //});
             //app.UseCorrelationId();
             //app.UseHttpMetrics();
-            app.UseCustomHealthCheck();
+            
+            if (app.Environment.UseHealthChecks())
+            {
+                app.UseCustomHealthCheck();
+            }
+
             //app.MapMetrics();
             app.MapGet("/", x => x.Response.WriteAsync(appOptions.Name));
 
