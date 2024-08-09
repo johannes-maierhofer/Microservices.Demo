@@ -18,6 +18,7 @@ public static class ConfigurationExtensions
     {
         var appOptions = services.GetOptions<AppOptions>("App");
         var logOptions = services.GetOptions<LogOptions>("Log");
+        var openTelemetryOptions = services.GetOptions<OpenTelemetryOption>("OpenTelemetry");
 
         // add custom ActivitySource for application
         Telemetry.ActivitySource = new ActivitySource(appOptions.Name);
@@ -25,39 +26,49 @@ public static class ConfigurationExtensions
         // configure tracing
         services
             .AddOpenTelemetry()
-            .WithTracing(builder => builder
-                .AddAspNetCoreInstrumentation(options =>
-                {
-                    options.Filter = context =>
+            .WithTracing(builder =>
+            {
+                builder
+                    .AddAspNetCoreInstrumentation(options =>
                     {
-                        if (context.Request.Path.ToString().EndsWith("/healthz"))
-                            return false;
+                        options.Filter = context =>
+                        {
+                            if (context.Request.Path.ToString().EndsWith("/healthz"))
+                                return false;
 
-                        return true;
-                    };
-                })
-                .AddHttpClientInstrumentation(options =>
-                {
-                    options.FilterHttpRequestMessage = message =>
+                            return true;
+                        };
+                    })
+                    .AddHttpClientInstrumentation(options =>
                     {
-                        // ignore http calls to seq
-                        var requestUrl = message.RequestUri?.ToString() ?? string.Empty;
-                        if (requestUrl.StartsWith(logOptions.Seq.ServiceUrl))
-                            return false;
+                        options.FilterHttpRequestMessage = message =>
+                        {
+                            // ignore http calls to seq
+                            var requestUrl = message.RequestUri?.ToString() ?? string.Empty;
+                            if (requestUrl.StartsWith(logOptions.Seq.ServiceUrl))
+                                return false;
 
-                        // ignore http calls to health-check
-                        if (requestUrl.ToLower().EndsWith("/healthz"))
-                            return false;
+                            // ignore http calls to health-check
+                            if (requestUrl.ToLower().EndsWith("/healthz"))
+                                return false;
 
-                        return true;
-                    };
-                })
-                .SetResourceBuilder(ResourceBuilder
-                    .CreateDefault()
-                    .AddService(appOptions.Name))
-                .AddSource("MassTransit")
-                .AddSource(appOptions.Name) // app-specific source from Telemetry.ActivitySource
-                .AddJaegerExporter());
+                            return true;
+                        };
+                    })
+                    .SetResourceBuilder(ResourceBuilder
+                        .CreateDefault()
+                        .AddService(appOptions.Name))
+                    .AddSource("MassTransit")
+                    .AddSource(appOptions.Name); // app-specific source from Telemetry.ActivitySource
+
+                if (!string.IsNullOrEmpty(openTelemetryOptions.OtlpUrl))
+                {
+                    builder.AddOtlpExporter(o =>
+                    {
+                        o.Endpoint = new Uri(openTelemetryOptions.OtlpUrl); // Jaeger endpoint
+                    });
+                }
+            });
 
         return services;
     }
