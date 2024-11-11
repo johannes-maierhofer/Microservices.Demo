@@ -22,15 +22,15 @@ namespace Argo.MD.Promotions
         public static WebApplicationBuilder AddInfrastructure(this WebApplicationBuilder builder)
         {
             builder.Services.AddOptions();
-            builder.Services.Configure<UrlsConfig>(builder.Configuration.GetSection("Urls"));
+            builder.Services.Configure<ServiceUrlSettings>(builder.Configuration.GetSection("ServiceUrl"));
 
-            var urlsConfig = builder.Configuration
-                .GetSection("Urls")
-                .Get<UrlsConfig>()!;
+            var urlSettings = builder.Configuration
+                .GetSection("ServiceUrl")
+                .Get<ServiceUrlSettings>()!;
 
             builder.Services.AddHttpClient<ICustomerApiClient, CustomerApiClient>(httpClient =>
             {
-                httpClient.BaseAddress = new Uri(urlsConfig.Customers);
+                httpClient.BaseAddress = new Uri(urlSettings.CustomerApi);
             });
 
             builder.Services.Configure<ApiBehaviorOptions>(options =>
