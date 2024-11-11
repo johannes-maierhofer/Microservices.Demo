@@ -1,6 +1,5 @@
 ﻿using Argo.MD.EmailSender.Messages.Commands;
 using MassTransit;
-using Microsoft.Extensions.Logging;
 
 namespace Argo.MD.EmailSender.MessageConsumers
 {
