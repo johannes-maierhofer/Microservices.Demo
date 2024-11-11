@@ -12,10 +12,10 @@ namespace Argo.MD.Customers.Api.IntegrationTests
             Fixture = fixture;
         }
 
-        protected CustomerClient CreateCustomerClient()
+        protected CustomerApiClient CreateCustomerApiClient()
         {
             var client = Fixture.Factory.CreateClient();
-            return new CustomerClient(client.BaseAddress?.ToString(), client);
+            return new CustomerApiClient(client);
         }
 
         public Task InitializeAsync()

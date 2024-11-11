@@ -6,8 +6,8 @@ using Argo.MD.BuildingBlocks.Messaging.MassTransit;
 using Argo.MD.BuildingBlocks.Tracing.OpenTelemetry;
 using Argo.MD.BuildingBlocks.Web;
 using Argo.MD.BuildingBlocks.Web.Swagger;
+using Argo.MD.Customers.Api.Client;
 using Argo.MD.Promotions.Config;
-using Argo.MD.Promotions.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,12 +28,10 @@ namespace Argo.MD.Promotions
                 .GetSection("Urls")
                 .Get<UrlsConfig>()!;
 
-            builder.Services.AddHttpClient("Customers", httpClient =>
+            builder.Services.AddHttpClient<ICustomerApiClient, CustomerApiClient>(httpClient =>
             {
                 httpClient.BaseAddress = new Uri(urlsConfig.Customers);
             });
-
-            builder.Services.AddScoped<ICustomerApiClient, CustomerApiClient>();
 
             builder.Services.Configure<ApiBehaviorOptions>(options =>
             {

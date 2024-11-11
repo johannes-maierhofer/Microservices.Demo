@@ -13,7 +13,7 @@ public class CreateCustomerTests : AppTestBase
     public async Task CreateCustomer_ShouldReturnNonEmptyGuid_WhenCommandIsValid()
     {
         // Arrange
-        var client = CreateCustomerClient();
+        var client = CreateCustomerApiClient();
 
         // Act
         var response = await client.CreateCustomerAsync(new ApiClient.CreateCustomerRequest

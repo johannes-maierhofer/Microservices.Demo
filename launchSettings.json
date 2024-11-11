@@ -4,9 +4,10 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "customers.api": "StartDebugging",
-        "promotions.api": "StartDebugging",
-        "emailsender": "StartDebugging"
+        "customers-api": "StartDebugging",
+        "promotions-api": "StartDebugging",
+        "emailsender": "StartDebugging",
+        "healthcheck": "StartDebugging"
       }
     }
   }

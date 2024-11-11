@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
+    <ProjectReference Include="..\..\..\Customers\src\Customers.Api.Client\Customers.Api.Client.csproj" />
     <ProjectReference Include="..\..\..\Customers\src\Customers.Messages\Customers.Messages.csproj" />
     <ProjectReference Include="..\..\..\EmailSender\src\EmailSender.Messages\EmailSender.Messages.csproj" />
   </ItemGroup>

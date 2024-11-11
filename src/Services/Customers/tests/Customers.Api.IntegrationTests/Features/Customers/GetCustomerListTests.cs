@@ -12,7 +12,7 @@ public class GetCustomerListTests : AppTestBase
     public async Task GetCustomerList_ShouldReturnListOfCustomers_ForPageNumberOne()
     {
         // Arrange
-        var client = CreateCustomerClient();
+        var client = CreateCustomerApiClient();
         const int pageNumber = 1;
         const int pageSize = 5;
 

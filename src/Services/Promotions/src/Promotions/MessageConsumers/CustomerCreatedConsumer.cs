@@ -1,7 +1,7 @@
 ﻿using Argo.MD.BuildingBlocks.Messaging;
+using Argo.MD.Customers.Api.Client;
 using Argo.MD.Customers.Messages.Events;
 using Argo.MD.EmailSender.Messages.Commands;
-using Argo.MD.Promotions.Services;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
@@ -25,14 +25,22 @@ namespace Argo.MD.Promotions.MessageConsumers
 
         public async Task Consume(ConsumeContext<CustomerCreated> context)
         {
-            _logger.LogInformation($"Consume message of type {nameof(CustomerCreated)} with customerId: {context.Message.Id}.");
+            _logger.LogInformation(
+                "Consume message of type {Consumer} with customerId: {CustomerId}.",
+                nameof(CustomerCreated),
+                context.Message.Id);
 
-            var customerData = await _apiClient.GetCustomerById(context.Message.Id);
+            var customer = await _apiClient.GetCustomerDetailsAsync(context.Message.Id);
+
+            if (customer.EmailAddress == null)
+            {
+                return;
+            }
 
             var sendEmailCmd = new SendEmail(
-                customerData.EmailAddress,
+                customer.EmailAddress,
                 "Promo for new customers",
-                $"Dear {customerData.FirstName}, we have some really cool offer for you as a new customer.");
+                $"Dear {customer.FirstName}, we have some really cool offer for you as a new customer.");
 
             await _bus.Send(sendEmailCmd);
         }

@@ -6,13 +6,13 @@ services:
 #  Services
 ###################################################
 
-  customers.api:
+  customers-api:
     image: ${DOCKER_REGISTRY-}customersapi
     build:
       context: .
       dockerfile: src/Services/Customers/src/Customers.Api/Dockerfile
 
-  promotions.api:
+  promotions-api:
     image: ${DOCKER_REGISTRY-}promotionsapi
     build:
       context: .
@@ -23,7 +23,13 @@ services:
     build:
       context: .
       dockerfile: src/Services/EmailSender/src/EmailSender/Dockerfile
-      
+
+  healthcheck:
+    image: ${DOCKER_REGISTRY-}healthcheck
+    build:
+      context: .
+      dockerfile: src/WebApps/HealthCheck/Dockerfile
+
 ###################################################
 #  Infrastructure
 ###################################################
@@ -82,3 +88,4 @@ volumes:
   sql_data:
   rabbitmq_data:
   seq_data:
+

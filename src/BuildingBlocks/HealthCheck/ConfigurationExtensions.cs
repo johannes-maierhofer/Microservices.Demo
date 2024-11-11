@@ -36,15 +36,6 @@ public static class ConfigurationExtensions
             healthChecksBuilder.AddSqlServer(sqlServerOptions.ConnectionString);
         }
 
-        //var appOptions = services.GetOptions<AppOptions>("App");
-
-        //services.AddHealthChecksUI(setup =>
-        //    {
-        //        setup.SetEvaluationTimeInSeconds(60); // time in seconds between check
-        //        setup.AddHealthCheckEndpoint($"Basic Health Check - {appOptions.Name}", "/healthz");
-        //    })
-        //    .AddSqlServerStorage(healthOptions.SqlServerStorageConnectionString);
-
         return services;
     }
 

@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <OpenApiReference Include="..\Customers.Api\Swagger\v1\swagger.json" CodeGenerator="NSwagCSharp" ClassName="CustomerClient" Link="OpenAPIs\swagger.json">
+	  <OpenApiReference Include="..\Customers.Api\Swagger\v1\swagger.json">
+		  <CodeGenerator>NSwagCSharp</CodeGenerator>
+		  <Link>OpenAPIs\swagger.json</Link>
+		  <ClassName>CustomerApiClient</ClassName>
+		  <OutputPath>../CustomerApiClient.g.cs</OutputPath>
+		  <Options>/UseBaseUrl:false /GenerateClientInterfaces:true /GenerateNullableReferenceTypes:true</Options>
 	  </OpenApiReference>
   </ItemGroup>
 

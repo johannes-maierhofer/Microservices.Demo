@@ -14,7 +14,7 @@ public class GetCustomerDetailsTests : AppTestBase
     {
         // Arrange
         var expectedCustomer = CustomerTestData.TestCustomer;
-        var client = CreateCustomerClient();
+        var client = CreateCustomerApiClient();
 
         // Act
         var response = await client.GetCustomerDetailsAsync(expectedCustomer.Id);
