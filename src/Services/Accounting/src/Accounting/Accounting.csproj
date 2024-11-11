@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
+    <ProjectReference Include="..\..\..\Customers\src\Customers.Api.Client\Customers.Api.Client.csproj" />
+    <ProjectReference Include="..\..\..\Customers\src\Customers.Messages\Customers.Messages.csproj" />
+  </ItemGroup>
+
+</Project>

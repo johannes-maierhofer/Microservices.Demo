@@ -5,44 +5,28 @@ using Argo.MD.EmailSender.Messages.Commands;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace Argo.MD.Promotions.MessageConsumers
+namespace Argo.MD.Promotions.MessageConsumers;
+
+public class CustomerCreatedConsumer(
+    ILogger<CustomerCreatedConsumer> logger,
+    ICustomerApiClient apiClient,
+    IMessageBus messageBus)
+    : IConsumer<CustomerCreated>
 {
-    public class CustomerCreatedConsumer : IConsumer<CustomerCreated>
+    public async Task Consume(ConsumeContext<CustomerCreated> context)
     {
-        private readonly ILogger<CustomerCreatedConsumer> _logger;
-        private readonly ICustomerApiClient _apiClient;
-        private readonly IMessageBus _bus;
+        logger.LogInformation(
+            "Consume message of type {Consumer} with customerId: {CustomerId}.",
+            nameof(CustomerCreated),
+            context.Message.Id);
 
-        public CustomerCreatedConsumer(
-            ILogger<CustomerCreatedConsumer> logger,
-            ICustomerApiClient apiClient,
-            IMessageBus bus)
-        {
-            _logger = logger;
-            _apiClient = apiClient;
-            _bus = bus;
-        }
+        var customer = await apiClient.GetCustomerDetailsAsync(context.Message.Id);
 
-        public async Task Consume(ConsumeContext<CustomerCreated> context)
-        {
-            _logger.LogInformation(
-                "Consume message of type {Consumer} with customerId: {CustomerId}.",
-                nameof(CustomerCreated),
-                context.Message.Id);
+        var sendEmail = new SendEmail(
+            customer.EmailAddress,
+            "Promo for new customers",
+            $"Dear {customer.FirstName}, we have some really cool offer for you as a new customer.");
 
-            var customer = await _apiClient.GetCustomerDetailsAsync(context.Message.Id);
-
-            if (customer.EmailAddress == null)
-            {
-                return;
-            }
-
-            var sendEmailCmd = new SendEmail(
-                customer.EmailAddress,
-                "Promo for new customers",
-                $"Dear {customer.FirstName}, we have some really cool offer for you as a new customer.");
-
-            await _bus.Send(sendEmailCmd);
-        }
+        await messageBus.Send(sendEmail);
     }
 }

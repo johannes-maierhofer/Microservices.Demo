@@ -18,6 +18,12 @@ services:
       context: .
       dockerfile: src/Services/Promotions/src/Promotions.Api/Dockerfile
 
+  accounting-api:
+    image: ${DOCKER_REGISTRY-}accountingapi
+    build:
+      context: .
+      dockerfile: src/Services/Accounting/src/Accounting.Api/Dockerfile
+
   emailsender:
     image: ${DOCKER_REGISTRY-}emailsender
     build:
@@ -88,4 +94,5 @@ volumes:
   sql_data:
   rabbitmq_data:
   seq_data:
+
 

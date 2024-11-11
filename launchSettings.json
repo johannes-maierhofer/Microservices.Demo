@@ -7,7 +7,8 @@
         "customers-api": "StartDebugging",
         "promotions-api": "StartDebugging",
         "emailsender": "StartDebugging",
-        "healthcheck": "StartDebugging"
+        "healthcheck": "StartDebugging",
+        "accounting.api": "StartDebugging"
       }
     }
   }

@@ -5,7 +5,7 @@ namespace Argo.MD.BuildingBlocks.Web;
 
 public static class ApiVersioningExtensions
 {
-    public static void AddCustomVersioning(
+    public static IServiceCollection AddCustomVersioning(
         this IServiceCollection services,
         Action<ApiVersioningOptions>? configurator = null)
     {
@@ -50,5 +50,7 @@ public static class ApiVersioningExtensions
 
             // Support versioning in mvc with with (Asp.Versioning.Mvc.ApiExplorer) dll
             .AddMvc(); // https://www.nuget.org/packages/Asp.Versioning.Mvc.ApiExplorer
+
+        return services;
     }
 }

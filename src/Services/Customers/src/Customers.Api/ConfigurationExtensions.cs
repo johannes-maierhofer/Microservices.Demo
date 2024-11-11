@@ -27,11 +27,41 @@ public static class ConfigurationExtensions
             options.SuppressModelStateInvalidFilter = true;
         });
 
-        builder.Services.AddScoped<IDomainEventPublisher, DomainEventPublisher>();
-        builder.Services.AddScoped<SavingChangesDomainEventDispatchingInterceptor>(); // must be scoped
+        builder.Services
+            .AddHttpContextAccessor()
+            .AddCustomSwagger(builder.Configuration, typeof(CustomersApiRoot).Assembly)
+            .AddCustomMediatr()
+            .AddValidatorsFromAssembly(typeof(CustomersApiRoot).Assembly)
+            .AddProblemDetails()
+            .AddCustomSerilog(builder.Configuration)
+            .AddCustomMassTransit<CustomerDbContext>(
+                builder.Configuration,
+                builder.Environment,
+                typeof(CustomersApiRoot).Assembly)
+            .AddCustomOpenTelemetry()
+            .AddPersistence();
 
-        var sqlServerOptions = builder.Services.GetOptions<SqlServerOptions>("SqlServer");
-        builder.Services.AddDbContext<CustomerDbContext>((serviceProvider, options) =>
+        // builder.Services.AddJwt();
+        // builder.Services.AddCustomMapster(typeof(CustomerApiRoot).Assembly);
+        // builder.Services.AddTransient<AuthHeaderHandler>();
+
+        builder.Services.AddCustomVersioning();
+
+        if (builder.Environment.UseHealthChecks())
+        {
+            builder.Services.AddCustomHealthCheck();
+        }
+
+        return builder;
+    }
+
+    private static IServiceCollection AddPersistence(this IServiceCollection services)
+    {
+        services.AddScoped<IDomainEventPublisher, DomainEventPublisher>();
+        services.AddScoped<SavingChangesDomainEventDispatchingInterceptor>(); // must be scoped
+
+        var sqlServerOptions = services.GetOptions<SqlServerOptions>("SqlServer");
+        services.AddDbContext<CustomerDbContext>((serviceProvider, options) =>
             {
                 options.UseSqlServer(
                     sqlServerOptions.ConnectionString,
@@ -41,30 +71,9 @@ public static class ConfigurationExtensions
                 options.AddInterceptors(serviceProvider.GetRequiredService<SavingChangesDomainEventDispatchingInterceptor>());
             }
         );
-        builder.Services.AddScoped<IDbContext>(sp => sp.GetRequiredService<CustomerDbContext>());
+        services.AddScoped<IDbContext>(sp => sp.GetRequiredService<CustomerDbContext>());
 
-        // builder.Services.AddJwt();
-        builder.Services.AddHttpContextAccessor();
-        builder.Services.AddCustomSwagger(builder.Configuration, typeof(CustomersApiRoot).Assembly);
-        builder.Services.AddCustomVersioning();
-        builder.Services.AddCustomMediatr();
-        builder.Services.AddValidatorsFromAssembly(typeof(CustomersApiRoot).Assembly);
-        builder.Services.AddProblemDetails();
-        //builder.Services.AddCustomMapster(typeof(CustomerApiRoot).Assembly);
-        builder.Services.AddCustomSerilog(builder.Configuration);
-        builder.Services.AddCustomMassTransit<CustomerDbContext>(
-            builder.Configuration,
-            builder.Environment,
-            typeof(CustomersApiRoot).Assembly);
-        builder.Services.AddCustomOpenTelemetry();
-        // builder.Services.AddTransient<AuthHeaderHandler>();
-
-        if(builder.Environment.UseHealthChecks())
-        {
-            builder.Services.AddCustomHealthCheck();
-        }
-
-        return builder;
+        return services;
     }
 
     public static WebApplication UseInfrastructure(this WebApplication app)

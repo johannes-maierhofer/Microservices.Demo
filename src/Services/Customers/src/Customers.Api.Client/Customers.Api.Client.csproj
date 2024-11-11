@@ -10,7 +10,7 @@
 		  <Link>OpenAPIs\swagger.json</Link>
 		  <ClassName>CustomerApiClient</ClassName>
 		  <OutputPath>../CustomerApiClient.g.cs</OutputPath>
-		  <Options>/UseBaseUrl:false /GenerateClientInterfaces:true /GenerateNullableReferenceTypes:true</Options>
+		  <Options>/UseBaseUrl:false /GenerateClientInterfaces:true</Options>
 	  </OpenApiReference>
   </ItemGroup>
 

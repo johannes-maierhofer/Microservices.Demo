@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Content Remove="appsettings.json" />
-    <Content Remove="appsettings.test.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,9 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="appsettings.test.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
