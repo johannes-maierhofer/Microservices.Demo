@@ -19,8 +19,6 @@ public static class ConfigurationExtensions
         if (!healthOptions.Enabled) 
             return services;
 
-        var appOptions = services.GetOptions<AppOptions>("App");
-        
         var healthChecksBuilder = services.AddHealthChecks();
 
         var rabbitMqOptions = services.GetOptions<RabbitMqOptions>("RabbitMq");
@@ -38,12 +36,14 @@ public static class ConfigurationExtensions
             healthChecksBuilder.AddSqlServer(sqlServerOptions.ConnectionString);
         }
 
-        services.AddHealthChecksUI(setup =>
-            {
-                setup.SetEvaluationTimeInSeconds(60); // time in seconds between check
-                setup.AddHealthCheckEndpoint($"Basic Health Check - {appOptions.Name}", "/healthz");
-            })
-            .AddSqlServerStorage(healthOptions.SqlServerStorageConnectionString);
+        //var appOptions = services.GetOptions<AppOptions>("App");
+
+        //services.AddHealthChecksUI(setup =>
+        //    {
+        //        setup.SetEvaluationTimeInSeconds(60); // time in seconds between check
+        //        setup.AddHealthCheckEndpoint($"Basic Health Check - {appOptions.Name}", "/healthz");
+        //    })
+        //    .AddSqlServerStorage(healthOptions.SqlServerStorageConnectionString);
 
         return services;
     }
