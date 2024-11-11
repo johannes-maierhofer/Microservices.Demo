@@ -1,14 +1,37 @@
-version: "3.3"
-name: "microservices-demo-infrastructure"
+name: "microservices-demo"
 
 services:
 
-    #######################################################
-    #  Sql-server
-    #######################################################
-  sql-server-db:
+###################################################
+#  Services
+###################################################
+
+  customers.api:
+    image: ${DOCKER_REGISTRY-}customersapi
+    build:
+      context: .
+      dockerfile: src/Services/Customers/src/Customers.Api/Dockerfile
+
+  promotions.api:
+    image: ${DOCKER_REGISTRY-}promotionsapi
+    build:
+      context: .
+      dockerfile: src/Services/Promotions/src/Promotions.Api/Dockerfile
+
+  emailsender:
+    image: ${DOCKER_REGISTRY-}emailsender
+    build:
+      context: .
+      dockerfile: src/Services/EmailSender/src/EmailSender/Dockerfile
+      
+###################################################
+#  Infrastructure
+###################################################
+
+  sql-server:
     container_name: sql-server-msdi
     image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: unless-stopped
     ports:
       - "7433:1433"
     environment:
@@ -17,9 +40,6 @@ services:
     volumes:
       - sql_data:/home/sql/data
 
-    #######################################################
-    #  Rabbitmq
-    #######################################################
   rabbitmq:
     container_name: rabbitmq-msdi
     image: rabbitmq:3-management
@@ -30,9 +50,6 @@ services:
     volumes:
       - rabbitmq_data:/home/rabbitmq/data
     
-    #######################################################
-    #  Jaeger
-    #######################################################
   jaeger:
     image: jaegertracing/all-in-one
     container_name: jaeger-msdi
@@ -46,18 +63,20 @@ services:
       - 14268:14268
       - 16686:16686
 
-    #######################################################
-    #  Seq
-    #######################################################
   seq:
     image: datalust/seq:latest
     container_name: seq-msdi
+    restart: unless-stopped
     ports:
       - '7341:80'
     environment:
       - ACCEPT_EULA=Y
     volumes:
       - seq_data:/home/seq/data
+
+###################################################
+#  Volumes
+###################################################
 
 volumes:
   sql_data:

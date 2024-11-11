@@ -1,16 +1,13 @@
-version: "3.3"
-name: "microservices-demo"
-
 services:
 
     #######################################################
     #  Sql-server
     #######################################################
-  sql-server-db:
+  sql-server:
     container_name: sql-server-msdi
     image: mcr.microsoft.com/mssql/server:2019-latest
     ports:
-      - "1433:1433"
+      - "7433:1433"
     environment:
       SA_PASSWORD: "str0ngp@ssword"
       ACCEPT_EULA: "Y"
@@ -25,8 +22,8 @@ services:
     image: rabbitmq:3-management
     restart: unless-stopped
     ports:
-      - 5672:5672
-      - 15672:15672
+      - 7672:5672
+      - 17672:15672
     volumes:
       - rabbitmq_data:/home/rabbitmq/data
     
@@ -53,7 +50,7 @@ services:
     image: datalust/seq:latest
     container_name: seq-msdi
     ports:
-      - '5341:80'
+      - '7341:80'
     environment:
       - ACCEPT_EULA=Y
     volumes:
