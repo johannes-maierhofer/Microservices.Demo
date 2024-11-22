@@ -9,7 +9,10 @@ WORKDIR /app
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
+
 WORKDIR /src
+COPY ["Directory.Build.props", "."]
+COPY ["Directory.Packages.props", "."]
 COPY ["src/Services/EmailSender/src/EmailSender/EmailSender.csproj", "src/Services/EmailSender/src/EmailSender/"]
 COPY ["src/BuildingBlocks/BuildingBlocks.csproj", "src/BuildingBlocks/"]
 COPY ["src/Services/EmailSender/src/EmailSender.Messages/EmailSender.Messages.csproj", "src/Services/EmailSender/src/EmailSender.Messages/"]

@@ -9,10 +9,6 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
 	<PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
 	<PackageReference Include="Mapster" />
 	<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
@@ -34,16 +30,6 @@
   <ItemGroup>
 	<ProjectReference Include="..\..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
 	<ProjectReference Include="..\Customers.Messages\Customers.Messages.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Swagger\v1\" />
   </ItemGroup>
 
   <Target Name="Generate OpenApi Specification Document" AfterTargets="Build">

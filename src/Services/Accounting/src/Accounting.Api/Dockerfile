@@ -11,14 +11,18 @@ EXPOSE 8081
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
+
 WORKDIR /src
+COPY ["Directory.Build.props", "."]
+COPY ["Directory.Packages.props", "."]
 COPY ["src/Services/Accounting/src/Accounting.Api/Accounting.Api.csproj", "src/Services/Accounting/src/Accounting.Api/"]
 COPY ["src/BuildingBlocks/BuildingBlocks.csproj", "src/BuildingBlocks/"]
 COPY ["src/Services/Accounting/src/Accounting/Accounting.csproj", "src/Services/Accounting/src/Accounting/"]
 COPY ["src/Services/Customers/src/Customers.Api.Client/Customers.Api.Client.csproj", "src/Services/Customers/src/Customers.Api.Client/"]
-COPY ["src/Services/Customers/src/Customers.Api/Customers.Api.csproj", "src/Services/Customers/src/Customers.Api/"]
 COPY ["src/Services/Customers/src/Customers.Messages/Customers.Messages.csproj", "src/Services/Customers/src/Customers.Messages/"]
+
 RUN dotnet restore "./src/Services/Accounting/src/Accounting.Api/Accounting.Api.csproj"
+
 COPY . .
 WORKDIR "/src/src/Services/Accounting/src/Accounting.Api"
 RUN dotnet build "./Accounting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build

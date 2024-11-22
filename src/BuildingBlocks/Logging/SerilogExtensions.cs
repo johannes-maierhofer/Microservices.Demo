@@ -13,15 +13,16 @@ namespace Argo.MD.BuildingBlocks.Logging
         public static IServiceCollection AddCustomSerilog(this IServiceCollection services, IConfiguration configuration)
         {
             // var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
             var appOptions = configuration
                 .GetSection("App")
-                .Get<AppOptions>();
+                .Get<AppOptions>() ?? new AppOptions();
 
             var logOptions = configuration
                 .GetSection("Log")
-                .Get<LogOptions>();
+                .Get<LogOptions>() ?? new LogOptions();
 
-            var logLevel = Enum.TryParse<LogEventLevel>(logOptions!.Level, true, out var level)
+            var logLevel = Enum.TryParse<LogEventLevel>(logOptions.Level, true, out var level)
                 ? level
                 : LogEventLevel.Information;
 
@@ -38,7 +39,7 @@ namespace Argo.MD.BuildingBlocks.Logging
                     .Enrich.WithExceptionDetails()
                     .Enrich.WithSpan() // span information from current activity
                     .Enrich.FromLogContext()
-                    .Enrich.WithProperty("ApplicationName", appOptions!.Name)
+                    .Enrich.WithProperty("ApplicationName", appOptions.Name)
                     .ReadFrom.Configuration(configuration);
 
                 if (logOptions.Seq is { Enabled: true })

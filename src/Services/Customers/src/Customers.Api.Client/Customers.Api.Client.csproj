@@ -26,10 +26,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-	  <ProjectReference Include="..\Customers.Api\Customers.Api.csproj">
-		  <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-	  </ProjectReference>
-  </ItemGroup>
-
 </Project>
