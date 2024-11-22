@@ -8,9 +8,9 @@ namespace Argo.MD.BuildingBlocks.Testing
         private const string Username = "guest";
         private const string Password = "guest";
         private const ushort Port = 5672;
-        private const ushort ContainerPort = 54461;
+        private const ushort ContainerPort = 57461;
         private const ushort ApiPort = 15672;
-        private const ushort ContainerApiPort = 54464;
+        private const ushort ContainerApiPort = 57464;
 
         private readonly RabbitMqContainer _container = new RabbitMqBuilder()
             .WithImage("rabbitmq:3-management")

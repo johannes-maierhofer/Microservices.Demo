@@ -1,4 +1,5 @@
 ﻿using Argo.MD.BuildingBlocks.Core.Domain;
+using Argo.MD.Customers.Api.Domain.CustomerAggregate.Events;
 
 namespace Argo.MD.Customers.Api.Domain.CustomerAggregate;
 
@@ -31,9 +32,18 @@ public class Customer : Entity<Guid>
             lastName,
             emailAddress);
 
-        customer.AddDomainEvent(new CustomerCreatedEvent(customer));
+        customer.AddDomainEvent(new CustomerCreated(customer));
 
         return customer;
+    }
+
+    public void Update(string firstName, string lastName, string emailAddress)
+    {
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.EmailAddress = emailAddress;
+
+        AddDomainEvent(new CustomerUpdated(this));
     }
 
 #pragma warning disable CS8618

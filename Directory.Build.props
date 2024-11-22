@@ -12,7 +12,7 @@
 	<!-- NuGet -->
 	<PropertyGroup>
 		<NuGetAudit>true</NuGetAudit>
-		<NuGetAuditLevel>moderate</NuGetAuditLevel>
+		<NuGetAuditLevel>high</NuGetAuditLevel>
 		<NuGetAuditMode>all</NuGetAuditMode>
 	</PropertyGroup>
 

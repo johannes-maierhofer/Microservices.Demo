@@ -1,6 +1,6 @@
 ﻿using Argo.MD.BuildingBlocks.Messaging;
 using Argo.MD.Customers.Api.Client;
-using Argo.MD.Customers.Messages.Events;
+using Argo.MD.Customers.Messages;
 using Argo.MD.EmailSender.Messages.Commands;
 using MassTransit;
 using Microsoft.Extensions.Logging;
@@ -20,7 +20,7 @@ public class CustomerCreatedConsumer(
             nameof(CustomerCreated),
             context.Message.Id);
 
-        var customer = await apiClient.GetCustomerDetailsAsync(context.Message.Id);
+        var customer = await apiClient.GetCustomerAsync(context.Message.Id);
 
         var sendEmail = new SendEmail(
             customer.EmailAddress,

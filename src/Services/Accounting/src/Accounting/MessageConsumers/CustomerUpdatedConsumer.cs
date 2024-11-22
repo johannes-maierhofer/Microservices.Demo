@@ -7,17 +7,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Argo.MD.Accounting.MessageConsumers;
 
-public class CustomerCreatedConsumer(
-    ILogger<CustomerCreatedConsumer> logger,
+public class CustomerUpdatedConsumer(
+    ILogger<CustomerUpdatedConsumer> logger,
     AccountingDbContext dbContext,
     ICustomerApiClient apiClient)
-    : IConsumer<CustomerCreated>
+    : IConsumer<CustomerUpdated>
 {
-    public async Task Consume(ConsumeContext<CustomerCreated> context)
+    public async Task Consume(ConsumeContext<CustomerUpdated> context)
     {
         logger.LogInformation(
             "Consume message of type {EventName} with customerId: {CustomerId}.",
-            nameof(CustomerCreated),
+            nameof(CustomerUpdated),
             context.Message.Id);
 
         // handling the event is IDEMPOTENT!!!!!!!!!

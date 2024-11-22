@@ -2,18 +2,11 @@
 
 namespace Argo.MD.BuildingBlocks.Core.Domain.Events
 {
-    public class DomainEventPublisher : IDomainEventPublisher
+    public class DomainEventPublisher(IMediator mediator) : IDomainEventPublisher
     {
-        private readonly IMediator _mediator;
-
-        public DomainEventPublisher(IMediator mediator)
+        public async Task Publish(IDomainEvent domainEvent)
         {
-            _mediator = mediator;
-        }
-
-        public async Task Publish(DomainEvent domainEvent)
-        {
-            await _mediator.Publish(domainEvent);
+            await mediator.Publish(domainEvent);
         }
     }
 }

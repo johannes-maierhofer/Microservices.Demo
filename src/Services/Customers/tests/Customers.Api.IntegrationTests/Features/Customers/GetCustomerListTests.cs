@@ -2,12 +2,8 @@
 
 namespace Argo.MD.Customers.Api.IntegrationTests.Features.Customers;
 
-public class GetCustomerListTests : AppTestBase
+public class GetCustomerListTests(AppTestFixture fixture) : AppTestBase(fixture)
 {
-    public GetCustomerListTests(AppTestFixture fixture) : base(fixture)
-    {
-    }
-
     [Fact]
     public async Task GetCustomerList_ShouldReturnListOfCustomers_ForPageNumberOne()
     {

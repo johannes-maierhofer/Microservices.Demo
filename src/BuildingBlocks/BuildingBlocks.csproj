@@ -11,7 +11,6 @@
 	<PackageReference Include="AspNetCore.HealthChecks.SqlServer" />
 	<PackageReference Include="AspNetCore.HealthChecks.UI" />
 	<PackageReference Include="AspNetCore.HealthChecks.UI.Client" />
-	<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" />
 	<PackageReference Include="AspNetCore.HealthChecks.UI.SqlServer.Storage" />
 	<PackageReference Include="FluentValidation" />
 	<PackageReference Include="Humanizer.Core" />
@@ -42,6 +41,8 @@
     <PackageReference Include="Serilog.Sinks.XUnit" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
+    <PackageReference Include="System.Net.Http" />
+    <PackageReference Include="System.Text.RegularExpressions" />
     <PackageReference Include="Testcontainers.MsSql" />
     <PackageReference Include="Testcontainers.RabbitMq" />
     <PackageReference Include="Unchase.Swashbuckle.AspNetCore.Extensions" />

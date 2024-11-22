@@ -3,29 +3,29 @@ using Argo.MD.Customers.Api.Features.Customers.Common;
 using Mapster;
 using MediatR;
 
-namespace Argo.MD.Customers.Api.Features.Customers.Commands.CreateCustomer;
+namespace Argo.MD.Customers.Api.Features.Customers.Commands.UpdateCustomer;
 
-public class CreateCustomerEndpoint : IMinimalEndpoint
+public class UpdateCustomerEndpoint : IMinimalEndpoint
 {
     public IEndpointRouteBuilder MapEndpoint(IEndpointRouteBuilder builder)
     {
-        builder.MapPost($"{EndpointConfig.BaseApiPath}/customers", async (
-                CreateCustomerRequest request,
+        builder.MapPut($"{EndpointConfig.BaseApiPath}/customers", async (
+                UpdateCustomerRequest request,
                 IMediator mediator,
                 CancellationToken cancellationToken) =>
             {
-                var command = request.Adapt<CreateCustomerCommand>();
+                var command = request.Adapt<UpdateCustomerCommand>();
                 var result = await mediator.Send(command, cancellationToken);
 
                 return Results.Ok(result);
             })
             // .RequireAuthorization()
-            .WithName("CreateCustomer")
+            .WithName("UpdateCustomer")
             .WithApiVersionSet(builder.NewApiVersionSet("Customers").Build())
             .Produces<CustomerResponse>()
             .ProducesProblem(StatusCodes.Status400BadRequest)
-            .WithSummary("Create customer")
-            .WithDescription("Create customer")
+            .WithSummary("Update customer")
+            .WithDescription("Update customer")
             .WithOpenApi()
             .HasApiVersion(1.0);
 
@@ -33,7 +33,8 @@ public class CreateCustomerEndpoint : IMinimalEndpoint
     }
 }
 
-public record CreateCustomerRequest(
+public record UpdateCustomerRequest(
+    Guid Id,
     string FirstName,
     string LastName,
     string EmailAddress

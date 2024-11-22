@@ -1,10 +1,10 @@
 ﻿using Argo.MD.BuildingBlocks.Web;
-using Argo.MD.Customers.Api.Contracts.Customers;
+using Argo.MD.Customers.Api.Features.Customers.Common;
 using MediatR;
 
-namespace Argo.MD.Customers.Api.Features.Customers.Queries.GetCustomerDetails;
+namespace Argo.MD.Customers.Api.Features.Customers.Queries.GetCustomer;
 
-public class GetCustomerDetailsEndpoint : IMinimalEndpoint
+public class GetCustomerEndpoint : IMinimalEndpoint
 {
     public IEndpointRouteBuilder MapEndpoint(IEndpointRouteBuilder builder)
     {
@@ -13,16 +13,16 @@ public class GetCustomerDetailsEndpoint : IMinimalEndpoint
                 IMediator mediator,
                 CancellationToken cancellationToken) =>
             {
-                var result = await mediator.Send(new GetCustomerDetailsQuery(id), cancellationToken);
+                var result = await mediator.Send(new GetCustomerQuery(id), cancellationToken);
                 return Results.Ok(result);
             })
             // .RequireAuthorization()
-            .WithName("GetCustomerDetails")
+            .WithName("GetCustomer")
             .WithApiVersionSet(builder.NewApiVersionSet("Customers").Build())
-            .Produces<CustomerDetailsResponse>()
+            .Produces<CustomerResponse>()
             .ProducesProblem(StatusCodes.Status404NotFound)
-            .WithSummary("Get customer details")
-            .WithDescription("Get customer details")
+            .WithSummary("Get customer")
+            .WithDescription("Get customer")
             .WithOpenApi()
             .HasApiVersion(1.0);
 

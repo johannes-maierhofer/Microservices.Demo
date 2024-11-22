@@ -2,6 +2,6 @@
 {
     public interface IDomainEventPublisher
     {
-        Task Publish(DomainEvent domainEvent);
+        Task Publish(IDomainEvent domainEvent);
     }
 }

@@ -6,19 +6,19 @@ namespace Argo.MD.BuildingBlocks.Core.Domain
     public abstract class Entity<TId> : IHasDomainEvents
         where TId : struct
     {
-        private readonly List<DomainEvent> _domainEvents = new();
+        private readonly List<IDomainEvent> _domainEvents = new();
 
         public TId Id { get; init; }
         
         [NotMapped]
-        public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+        public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-        public void AddDomainEvent(DomainEvent domainEvent)
+        public void AddDomainEvent(IDomainEvent domainEvent)
         {
             _domainEvents.Add(domainEvent);
         }
 
-        public void RemoveDomainEvent(DomainEvent domainEvent)
+        public void RemoveDomainEvent(IDomainEvent domainEvent)
         {
             _domainEvents.Remove(domainEvent);
         }

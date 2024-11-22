@@ -13,7 +13,9 @@
 	<ItemGroup>
 		<PackageReference Include="AspNetCore.HealthChecks.UI" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+		<PackageReference Include="System.Text.Json" />
 	</ItemGroup>
 
 </Project>

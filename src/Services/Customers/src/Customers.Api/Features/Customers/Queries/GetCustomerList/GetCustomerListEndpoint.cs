@@ -1,5 +1,5 @@
 ﻿using Argo.MD.BuildingBlocks.Web;
-using Argo.MD.Customers.Api.Contracts.Customers;
+using Argo.MD.Customers.Api.Features.Customers.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -3,12 +3,8 @@ using FluentAssertions;
 
 namespace Argo.MD.Customers.Api.IntegrationTests.Features.Customers;
 
-public class GetCustomerDetailsTests : AppTestBase
+public class GetCustomerTests(AppTestFixture fixture) : AppTestBase(fixture)
 {
-    public GetCustomerDetailsTests(AppTestFixture fixture) : base(fixture)
-    {
-    }
-
     [Fact]
     public async Task GetCustomer_ShouldBeAsExpected_ForExistingCustomer()
     {
@@ -17,7 +13,7 @@ public class GetCustomerDetailsTests : AppTestBase
         var client = CreateCustomerApiClient();
 
         // Act
-        var response = await client.GetCustomerDetailsAsync(expectedCustomer.Id);
+        var response = await client.GetCustomerAsync(expectedCustomer.Id);
 
         // Assert
         response.Should().NotBeNull();

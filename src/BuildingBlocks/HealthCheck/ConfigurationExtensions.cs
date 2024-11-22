@@ -21,14 +21,14 @@ public static class ConfigurationExtensions
 
         var healthChecksBuilder = services.AddHealthChecks();
 
-        var rabbitMqOptions = services.GetOptions<RabbitMqOptions>("RabbitMq");
-        if (!string.IsNullOrEmpty(rabbitMqOptions.HostName))
-        {
-            healthChecksBuilder
-                .AddRabbitMQ(
-                    rabbitConnectionString:
-                    $"amqp://{rabbitMqOptions.UserName}:{rabbitMqOptions.Password}@{rabbitMqOptions.HostName}");
-        }
+        //var rabbitMqOptions = services.GetOptions<RabbitMqOptions>("RabbitMq");
+        //if (!string.IsNullOrEmpty(rabbitMqOptions.HostName))
+        //{
+        //    healthChecksBuilder
+        //        .AddRabbitMQ(
+        //            rabbitConnectionString:
+        //            $"amqp://{rabbitMqOptions.UserName}:{rabbitMqOptions.Password}@{rabbitMqOptions.HostName}");
+        //}
 
         var sqlServerOptions = services.GetOptions<SqlServerOptions>("SqlServer");
         if (!string.IsNullOrEmpty(sqlServerOptions.ConnectionString))
@@ -56,12 +56,7 @@ public static class ConfigurationExtensions
                         [HealthStatus.Degraded] = StatusCodes.Status500InternalServerError,
                         [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
                     }
-                })
-            .UseHealthChecksUI(options =>
-            {
-                options.ApiPath = "/healthcheck";
-                options.UIPath = "/healthcheck-ui";
-            });
+                });
 
         return app;
     }

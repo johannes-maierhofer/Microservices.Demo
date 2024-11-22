@@ -3,12 +3,8 @@ using ApiClient = Argo.MD.Customers.Api.Client;
 
 namespace Argo.MD.Customers.Api.IntegrationTests.Features.Customers;
 
-public class CreateCustomerTests : AppTestBase
+public class CreateCustomerTests(AppTestFixture fixture) : AppTestBase(fixture)
 {
-    public CreateCustomerTests(AppTestFixture fixture) : base(fixture)
-    {
-    }
-
     [Fact]
     public async Task CreateCustomer_ShouldReturnNonEmptyGuid_WhenCommandIsValid()
     {

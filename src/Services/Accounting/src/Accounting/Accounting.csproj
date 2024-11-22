@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Net.Http" />
+    <PackageReference Include="System.Text.RegularExpressions" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
     <ProjectReference Include="..\..\..\Customers\src\Customers.Api.Client\Customers.Api.Client.csproj" />
     <ProjectReference Include="..\..\..\Customers\src\Customers.Messages\Customers.Messages.csproj" />
