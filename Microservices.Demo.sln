@@ -69,6 +69,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting", "src\Services\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Api", "src\Services\Accounting\src\Accounting.Api\Accounting.Api.csproj", "{7E79E515-7913-4804-B500-E3B41CCD98EC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dapr", "dapr", "{0879E154-970A-4E69-8730-CE4A2A1BED38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{88C8587D-3ABF-4967-8A6A-96F7FA69DF97}"
+	ProjectSection(SolutionItems) = preProject
+		dapr\components\symphony-pubsub.yaml = dapr\components\symphony-pubsub.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configuration", "configuration", "{42E249DA-3A41-47FA-9002-AE6AE521A20E}"
+	ProjectSection(SolutionItems) = preProject
+		dapr\configuration\symphony-platform-config.yaml = dapr\configuration\symphony-platform-config.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +167,9 @@ Global
 		{BF295CE6-735A-4CF6-A9DB-BEF460419B75} = {C1506B63-944F-4AB6-9363-13D4FC74FB31}
 		{2B7CEA40-1484-498B-8259-E5E8B5CE5EEE} = {BF295CE6-735A-4CF6-A9DB-BEF460419B75}
 		{7E79E515-7913-4804-B500-E3B41CCD98EC} = {BF295CE6-735A-4CF6-A9DB-BEF460419B75}
+		{0879E154-970A-4E69-8730-CE4A2A1BED38} = {E86E6B18-6EF7-4596-81FB-94B3CB1D4C4C}
+		{88C8587D-3ABF-4967-8A6A-96F7FA69DF97} = {0879E154-970A-4E69-8730-CE4A2A1BED38}
+		{42E249DA-3A41-47FA-9002-AE6AE521A20E} = {0879E154-970A-4E69-8730-CE4A2A1BED38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65242230-301C-4965-800D-EFAB6C07A81E}

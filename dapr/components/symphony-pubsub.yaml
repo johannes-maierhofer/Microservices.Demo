@@ -1,0 +1,23 @@
+﻿apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: symphony-pubsub
+  namespace: symphony
+spec:
+  type: pubsub.rabbitmq
+  version: v1
+  metadata:
+  - name: connectionString
+    value: "amqp://guest:guest@rabbitmq-msdi:5672"
+  - name: protocol
+    value: amqp  
+  - name: durable
+    value: "false"
+  - name: deletedWhenUnused
+    value: "false"
+  - name: autoAck
+    value: "false"
+  - name: reconnectWait
+    value: "0"
+  - name: concurrency
+    value: parallel

@@ -7,6 +7,8 @@ using Argo.MD.BuildingBlocks.Tracing.OpenTelemetry;
 using Argo.MD.BuildingBlocks.Web;
 using Argo.MD.BuildingBlocks.Web.Swagger;
 using Argo.MD.Customers.Api.Client;
+using Argo.MD.Customers.Messages;
+using Argo.MD.EmailSender.Messages.Commands;
 using Argo.MD.Promotions.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -47,7 +49,11 @@ namespace Argo.MD.Promotions
             builder.Services.AddProblemDetails();
             //builder.Services.AddCustomMapster(typeof(PromotionsRoot).Assembly);
             builder.Services.AddCustomSerilog(builder.Configuration);
-            builder.Services.AddCustomMassTransit(builder.Configuration, builder.Environment, typeof(PromotionsRoot).Assembly);
+            builder.Services.AddCustomMassTransit(
+                builder.Configuration,
+                builder.Environment,
+                typeof(PromotionsRoot).Assembly,
+                [typeof(CustomerCreated).Assembly, typeof(SendEmail).Assembly]);
             builder.Services.AddCustomOpenTelemetry();
             // builder.Services.AddTransient<AuthHeaderHandler>();
 

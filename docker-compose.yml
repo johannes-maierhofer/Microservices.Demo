@@ -8,24 +8,38 @@ services:
 
   customers-api:
     image: ${DOCKER_REGISTRY-}customersapi
+    networks:
+      - planet
     build:
       context: .
       dockerfile: src/Services/Customers/src/Customers.Api/Dockerfile
 
+  customers-api-dapr:
+    image: "daprio/daprd:1.13.1"
+    network_mode: "service:customers-api"
+    depends_on:
+      - customers-api
+
   promotions-api:
     image: ${DOCKER_REGISTRY-}promotionsapi
+    networks:
+      - planet
     build:
       context: .
       dockerfile: src/Services/Promotions/src/Promotions.Api/Dockerfile
 
   accounting-api:
     image: ${DOCKER_REGISTRY-}accountingapi
+    networks:
+      - planet
     build:
       context: .
       dockerfile: src/Services/Accounting/src/Accounting.Api/Dockerfile
 
   emailsender:
     image: ${DOCKER_REGISTRY-}emailsender
+    networks:
+      - planet
     build:
       context: .
       dockerfile: src/Services/EmailSender/src/EmailSender/Dockerfile
@@ -44,6 +58,8 @@ services:
     container_name: sql-server-msdi
     image: mcr.microsoft.com/mssql/server:2019-latest
     restart: unless-stopped
+    networks:
+      - planet
     ports:
       - "7433:1433"
     environment:
@@ -56,6 +72,8 @@ services:
     container_name: rabbitmq-msdi
     image: rabbitmq:3-management
     restart: unless-stopped
+    networks:
+      - planet
     ports:
       - 7672:5672
       - 17672:15672
@@ -66,6 +84,8 @@ services:
     image: jaegertracing/all-in-one
     container_name: jaeger-msdi
     restart: unless-stopped
+    networks:
+      - planet
     ports:
       - 5775:5775/udp
       - 5778:5778
@@ -79,6 +99,8 @@ services:
     image: datalust/seq:latest
     container_name: seq-msdi
     restart: unless-stopped
+    networks:
+      - planet
     ports:
       - '7341:80'
     environment:
@@ -95,4 +117,9 @@ volumes:
   rabbitmq_data:
   seq_data:
 
-
+###################################################
+#  Networks
+###################################################
+networks:
+  planet:
+    name: msdi_network

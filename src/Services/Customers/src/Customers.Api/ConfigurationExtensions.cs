@@ -11,6 +11,7 @@ using Argo.MD.BuildingBlocks.Tracing.OpenTelemetry;
 using Argo.MD.BuildingBlocks.Web;
 using Argo.MD.BuildingBlocks.Web.Swagger;
 using Argo.MD.Customers.Api.Persistence;
+using Argo.MD.Customers.Messages;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,8 @@ public static class ConfigurationExtensions
             options.SuppressModelStateInvalidFilter = true;
         });
 
+        builder.Services.AddDaprClient();
+
         builder.Services
             .AddHttpContextAccessor()
             .AddCustomSwagger(builder.Configuration, typeof(CustomersApiRoot).Assembly)
@@ -34,10 +37,12 @@ public static class ConfigurationExtensions
             .AddValidatorsFromAssembly(typeof(CustomersApiRoot).Assembly)
             .AddProblemDetails()
             .AddCustomSerilog(builder.Configuration)
-            .AddCustomMassTransit<CustomerDbContext>(
+            .AddCustomMassTransit(
                 builder.Configuration,
                 builder.Environment,
-                typeof(CustomersApiRoot).Assembly)
+                typeof(CustomersApiRoot).Assembly,
+                [typeof(CustomerCreated).Assembly])
+            // .AddDaprMessageBus()
             .AddCustomOpenTelemetry()
             .AddPersistence();
 

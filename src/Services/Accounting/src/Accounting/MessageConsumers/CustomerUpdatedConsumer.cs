@@ -45,3 +45,20 @@ public class CustomerUpdatedConsumer(
         await dbContext.SaveChangesAsync();
     }
 }
+
+public class SendEmailConsumerDefinition : ConsumerDefinition<CustomerUpdatedConsumer>
+{
+    protected override void ConfigureConsumer(IReceiveEndpointConfigurator endpointConfigurator, IConsumerConfigurator<CustomerUpdatedConsumer> consumerConfigurator,
+        IRegistrationContext context)
+    {
+        consumerConfigurator.UseMessageRetry(r => r.Exponential(
+            3,
+            TimeSpan.FromSeconds(1),
+            TimeSpan.FromSeconds(5),
+            TimeSpan.FromSeconds(1)));
+
+        consumerConfigurator.UseConcurrentMessageLimit(4);
+
+        base.ConfigureConsumer(endpointConfigurator, consumerConfigurator, context);
+    }
+}

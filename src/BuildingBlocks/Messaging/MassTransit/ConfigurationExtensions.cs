@@ -1,5 +1,7 @@
 using System.Reflection;
 using Argo.MD.BuildingBlocks.Configuration;
+using CloudEventify;
+using CloudEventify.MassTransit;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,13 +19,15 @@ public static class ConfigurationExtensions
     /// <param name="services"></param>
     /// <param name="configuration"></param>
     /// <param name="env"></param>
-    /// <param name="assembly"></param>
+    /// <param name="consumersFromAssembly"></param>
+    /// <param name="messagesAssemblies"></param>
     /// <returns></returns>
     public static IServiceCollection AddCustomMassTransit<TDbContext>(
         this IServiceCollection services,
         IConfiguration configuration,
         IHostEnvironment env,
-        Assembly assembly)
+        Assembly consumersFromAssembly,
+        IEnumerable<Assembly> messagesAssemblies)
         where TDbContext : DbContext
     {
         services.AddScoped<IMessageBus, MassTransitMessageBus>();
@@ -37,7 +41,8 @@ public static class ConfigurationExtensions
                     services,
                     configuration,
                     configure,
-                    assembly);
+                    consumersFromAssembly,
+                    messagesAssemblies);
 
                 configure.AddEntityFrameworkOutbox<TDbContext>(o =>
                 {
@@ -54,7 +59,8 @@ public static class ConfigurationExtensions
                 services,
                 configuration,
                 configure,
-                assembly);
+                consumersFromAssembly,
+                messagesAssemblies);
 
             configure.AddEntityFrameworkOutbox<TDbContext>(o =>
             {
@@ -72,7 +78,8 @@ public static class ConfigurationExtensions
         this IServiceCollection services,
         IConfiguration configuration,
         IHostEnvironment env,
-        Assembly assembly)
+        Assembly assembly,
+        IEnumerable<Assembly> messagesAssemblies)
     {
         services.AddScoped<IMessageBus, MassTransitMessageBus>();
         services.AddValidateOptions<RabbitMqOptions>();
@@ -85,7 +92,8 @@ public static class ConfigurationExtensions
                     services,
                     configuration,
                     configure,
-                    assembly);
+                    assembly,
+                    messagesAssemblies);
             });
             return services;
         }
@@ -96,7 +104,8 @@ public static class ConfigurationExtensions
                 services,
                 configuration,
                 configure,
-                assembly);
+                assembly,
+                messagesAssemblies);
         });
 
         return services;
@@ -106,26 +115,67 @@ public static class ConfigurationExtensions
         IServiceCollection services,
         IConfiguration configuration,
         IBusRegistrationConfigurator configure,
-        Assembly assembly)
+        Assembly consumersFromAssembly,
+        IEnumerable<Assembly> messagesAssemblies)
     {
         var appOptions = configuration
             .GetSection("App")
             .Get<AppOptions>();
 
-        configure.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter(appOptions!.Name + "--", false));
-        configure.AddConsumers(assembly);
-
-        configure.UsingRabbitMq((ctx, configurator) =>
+        // configure.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter(appOptions!.Name + "--", false));
+        configure.AddConsumers(consumersFromAssembly);
+        
+        configure.UsingRabbitMq((ctx, rmqConfig) =>
         {
             var rabbitMqOptions = services.GetOptions<RabbitMqOptions>("RabbitMq");
 
-            configurator.Host(rabbitMqOptions.HostName, rabbitMqOptions.Port ?? 5672, "/", h =>
+            rmqConfig.Host(rabbitMqOptions.HostName, rabbitMqOptions.Port ?? 5672, "/", h =>
             {
                 h.Username(rabbitMqOptions.UserName);
                 h.Password(rabbitMqOptions.Password);
             });
-            
-            configurator.ConfigureEndpoints(ctx);
+
+            rmqConfig
+                .UseCloudEvents()
+                .WithTypes(m => m.MapAllTypes(messagesAssemblies.ToArray()));
+
+            rmqConfig.ConfigureEndpoints(ctx);
         });
+    }
+
+    private static IMap MapAllTypes(this IMap typeMapper, params Assembly[] assemblies)
+    {
+        var mapMethod = typeof(IMap)
+            .GetMethods()
+            .FirstOrDefault(m => m.Name == "Map" && m.IsGenericMethod);
+
+        if (mapMethod == null)
+        {
+            throw new InvalidOperationException("Map method not found on CloudEventify.IMap.");
+        }
+
+        foreach (var assembly in assemblies)
+        {
+            var types = assembly.GetTypes()
+                .Where(t => t.IsClass &&
+                            !t.IsAbstract &&
+                            !typeof(Attribute).IsAssignableFrom(t))
+                .ToList();
+
+            foreach (var type in types)
+            {
+                try
+                {
+                    var genericMapMethod = mapMethod.MakeGenericMethod(type);
+                    genericMapMethod.Invoke(typeMapper, new object[] { type.FullName! });
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to map type {type.FullName}: {ex.Message}");
+                }
+            }
+        }
+
+        return typeMapper;
     }
 }

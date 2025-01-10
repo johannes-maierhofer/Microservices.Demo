@@ -13,6 +13,7 @@ using Argo.MD.BuildingBlocks.Tracing.OpenTelemetry;
 using Argo.MD.BuildingBlocks.Web;
 using Argo.MD.BuildingBlocks.Web.Swagger;
 using Argo.MD.Customers.Api.Client;
+using Argo.MD.Customers.Messages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,11 @@ namespace Argo.MD.Accounting
                 .AddCustomVersioning()
                 .AddProblemDetails()
                 .AddCustomSerilog(builder.Configuration)
-                .AddCustomMassTransit(builder.Configuration, builder.Environment, typeof(AccountingRoot).Assembly)
+                .AddCustomMassTransit(
+                    builder.Configuration,
+                    builder.Environment,
+                    typeof(AccountingRoot).Assembly,
+                    [typeof(CustomerCreated).Assembly])
                 .AddCustomOpenTelemetry()
                 .AddPersistence();
 

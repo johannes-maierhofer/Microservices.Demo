@@ -15,6 +15,10 @@ app.MapMinimalEndpoints();
 app.UseInfrastructure();
 app.UseDatabase();
 
+// Dapr
+app.UseCloudEvents();
+app.MapSubscribeHandler();
+
 app.Run();
 
 namespace Argo.MD.Customers.Api
