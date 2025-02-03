@@ -11,7 +11,6 @@ using Argo.MD.BuildingBlocks.Tracing.OpenTelemetry;
 using Argo.MD.BuildingBlocks.Web;
 using Argo.MD.BuildingBlocks.Web.Swagger;
 using Argo.MD.Customers.Api.Persistence;
-using Argo.MD.Customers.Messages;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -40,8 +39,7 @@ public static class ConfigurationExtensions
             .AddCustomMassTransit(
                 builder.Configuration,
                 builder.Environment,
-                typeof(CustomersApiRoot).Assembly,
-                [typeof(CustomerCreated).Assembly])
+                typeof(CustomersApiRoot).Assembly)
             // .AddDaprMessageBus()
             .AddCustomOpenTelemetry()
             .AddPersistence();

@@ -1,7 +1,5 @@
 using System.Reflection;
 using Argo.MD.BuildingBlocks.Configuration;
-using CloudEventify;
-using CloudEventify.MassTransit;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,8 +24,7 @@ public static class ConfigurationExtensions
         this IServiceCollection services,
         IConfiguration configuration,
         IHostEnvironment env,
-        Assembly consumersFromAssembly,
-        IEnumerable<Assembly> messagesAssemblies)
+        Assembly consumersFromAssembly)
         where TDbContext : DbContext
     {
         services.AddScoped<IMessageBus, MassTransitMessageBus>();
@@ -41,8 +38,7 @@ public static class ConfigurationExtensions
                     services,
                     configuration,
                     configure,
-                    consumersFromAssembly,
-                    messagesAssemblies);
+                    consumersFromAssembly);
 
                 configure.AddEntityFrameworkOutbox<TDbContext>(o =>
                 {
@@ -59,8 +55,7 @@ public static class ConfigurationExtensions
                 services,
                 configuration,
                 configure,
-                consumersFromAssembly,
-                messagesAssemblies);
+                consumersFromAssembly);
 
             configure.AddEntityFrameworkOutbox<TDbContext>(o =>
             {
@@ -78,8 +73,7 @@ public static class ConfigurationExtensions
         this IServiceCollection services,
         IConfiguration configuration,
         IHostEnvironment env,
-        Assembly assembly,
-        IEnumerable<Assembly> messagesAssemblies)
+        Assembly assembly)
     {
         services.AddScoped<IMessageBus, MassTransitMessageBus>();
         services.AddValidateOptions<RabbitMqOptions>();
@@ -92,8 +86,7 @@ public static class ConfigurationExtensions
                     services,
                     configuration,
                     configure,
-                    assembly,
-                    messagesAssemblies);
+                    assembly);
             });
             return services;
         }
@@ -104,8 +97,7 @@ public static class ConfigurationExtensions
                 services,
                 configuration,
                 configure,
-                assembly,
-                messagesAssemblies);
+                assembly);
         });
 
         return services;
@@ -115,8 +107,7 @@ public static class ConfigurationExtensions
         IServiceCollection services,
         IConfiguration configuration,
         IBusRegistrationConfigurator configure,
-        Assembly consumersFromAssembly,
-        IEnumerable<Assembly> messagesAssemblies)
+        Assembly consumersFromAssembly)
     {
         var appOptions = configuration
             .GetSection("App")
@@ -135,47 +126,10 @@ public static class ConfigurationExtensions
                 h.Password(rabbitMqOptions.Password);
             });
 
-            rmqConfig
-                .UseCloudEvents()
-                .WithTypes(m => m.MapAllTypes(messagesAssemblies.ToArray()));
+            rmqConfig.UseRawJsonSerializer();
+            rmqConfig.UseRawJsonDeserializer();
 
             rmqConfig.ConfigureEndpoints(ctx);
         });
-    }
-
-    private static IMap MapAllTypes(this IMap typeMapper, params Assembly[] assemblies)
-    {
-        var mapMethod = typeof(IMap)
-            .GetMethods()
-            .FirstOrDefault(m => m.Name == "Map" && m.IsGenericMethod);
-
-        if (mapMethod == null)
-        {
-            throw new InvalidOperationException("Map method not found on CloudEventify.IMap.");
-        }
-
-        foreach (var assembly in assemblies)
-        {
-            var types = assembly.GetTypes()
-                .Where(t => t.IsClass &&
-                            !t.IsAbstract &&
-                            !typeof(Attribute).IsAssignableFrom(t))
-                .ToList();
-
-            foreach (var type in types)
-            {
-                try
-                {
-                    var genericMapMethod = mapMethod.MakeGenericMethod(type);
-                    genericMapMethod.Invoke(typeMapper, new object[] { type.FullName! });
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Failed to map type {type.FullName}: {ex.Message}");
-                }
-            }
-        }
-
-        return typeMapper;
     }
 }
